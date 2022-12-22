@@ -65,6 +65,12 @@ class ResultsView(generic.DetailView):
     model = Question
     template_name = 'polls/results.html'
 
+    def get_queryset(self):
+        """Exclude any question that are not published yet."""
+        return Question.objects.filter(
+            pub_date__lte=timezone.now()
+        )
+
 # Django "generic views" system END
 
 def vote(request, question_id):
