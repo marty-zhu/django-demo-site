@@ -40,7 +40,7 @@ def create_question(question_text, days, without_choices=False):
     """
     time = timezone.now() + datetime.timedelta(days=days)
     q = Question.objects.create(question_text=question_text, pub_date=time)
-    if !without_choices:
+    if not without_choices:
         q.choice_set.create(choice_text="Choice 1", votes=0)
     return q
 
@@ -150,6 +150,6 @@ class QuestionsWithoutChoicesIndexViewTest(TestCase):
 
     def test_question_without_choices(self):
         """Past question with no choices are not shown in the index view."""
-        question_without_choices = create_question("Question without choices", -30)
+        question_without_choices = create_question("Question without choices", -30, without_choices=True)
         response = self.client.get(reverse('polls:index'))
         self.assertQuerysetEqual(response.context['latest_question_list'], [])
