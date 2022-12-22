@@ -135,3 +135,18 @@ class QuestionResultsViewTests(TestCase):
         url = reverse('polls:results', args=(past_question.id,))
         response = self.client.get(url)
         self.assertContains(response, past_question.question_text)
+
+class QuestionsWithoutChoicesIndexViewTest(TestCase):
+
+    def test_question_with_choices(self):
+        """Past question with choices are shown in the index view."""
+        question_with_choice = create_question("Question with choice", -30)
+        question_with_choice.choice_set.create(choice_text="Choice 1", votes=0)
+        response = self.client.get(reverse('polls:index'))
+        self.assertQuerysetEqual(response.context['latest_question_list'], [question_with_choice])
+
+    def test_question_without_choices(self):
+        """Past question with no choices are not shown in the index view."""
+        question_without_choices = create_question("Question without choices", -30)
+        response = self.client.get(reverse('polls:index'))
+        self.assertQuerysetEqual(response.context['latest_question_list'], [])
