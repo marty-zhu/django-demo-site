@@ -55,7 +55,7 @@ ROOT_URLCONF = 'demosite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],  # this is a search path for templates
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
