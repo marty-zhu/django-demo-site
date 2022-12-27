@@ -14,3 +14,22 @@ class Book(models.Model):
 
     def __str__(self):
         return f"{self.title} by {self.authors}"
+
+
+class Authors(models.Model):
+
+    first_name = models.CharField(max_length=20)
+    middle_initials = models.CharField(max_length=10)
+    last_name = models.CharField(max_length=30)
+    birth_date = models.DateField()
+    death_date = models.DateField()
+
+    @property
+    def full_name(self):
+        if middle_initials:
+            return ' '.join([self.first_name, self.middle_initials, self.last_name])
+        else:
+            return ' '.join([self.first_name, self.last_name])
+
+    def __str__(self):
+        return self.full_name
