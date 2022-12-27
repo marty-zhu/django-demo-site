@@ -54,3 +54,11 @@ class Authors(models.Model):
 
     def __str__(self):
         return self.full_name
+
+
+class Genre(models.Model):
+
+    name = models.CharField(max_length=30)
+
+    def __str__(self):
+        return name
