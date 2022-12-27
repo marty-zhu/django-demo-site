@@ -20,18 +20,21 @@ class BookInstance(models.Model):
     """
     An instance of the book in the catalog. This refers to each individual book that can be lent out under each Book title.
     """
-    uniqueId = models.CharField(max_length=20, help_text='The ID of the book in the catalog\'s stock')
+    uniqueId = models.CharField(max_length=20, help_text='The ID of the book in the catalog\'s stock', primary_key=True)
     due_back = models.DateTimeField()
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
     imprint = models.CharField(max_length=30)
     borrower = models.ForeignKey(User, on_delete=models.CASCADE)
 
     @property
-    def status:
+    def status(self):
         if due_back:
             return 'Out on loan'
         else:
             return 'Available'
+
+    def __str__(self):
+        return f"{self.book} with ID {self.uniqueId}"
 
 
 class Authors(models.Model):
