@@ -15,6 +15,9 @@ class Book(models.Model):
     def __str__(self):
         return f"{self.title} by {self.authors}"
 
+    class Meta:
+        ordering = ['isbn', 'title']
+
 
 class BookInstance(models.Model):
     """
