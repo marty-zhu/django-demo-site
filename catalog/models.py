@@ -16,7 +16,7 @@ class Book(models.Model):
         return f"{self.title} by {self.authors}"
 
     def get_absolute_url(self):
-        return reverse('book-detail', args=[str(self.isbn)])
+        return reverse('catalog:book-detail', args=[str(self.isbn)])
 
     class Meta:
         ordering = ['isbn', 'title']
