@@ -43,15 +43,15 @@ class Book(models.Model):
 
     title = models.CharField(max_length=200, help_text='The title of the book')
     pub_date = models.DateField(help_text='The publication date')
-    authors = models.ManyToManyField('Author', help_text='The name(s) of the author(s)')
+    authors = models.ManyToManyField('Author', related_name='authors', help_text='The name(s) of the author(s)')
     summary = models.CharField(max_length=1000, help_text='A summary of the book\'s content')
     isbn = models.IntegerField('ISBN', help_text='The ISBN number of the book', unique=True, primary_key=True)
-    genre = models.ManyToManyField('Genre', help_text='The genre(s) for this book')
+    genre = models.ManyToManyField('Genre', related_name='genres', help_text='The genre(s) for this book')
     language = models.ForeignKey('Language', null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         """Human-readable string representation for validation."""
-        return f"{self.title} by {self.authors}"
+        return f"{self.title} by {self.authors[0].full_name}"
 
     def get_absolute_url(self):
         """Returns the URL to access a detailed record for this book."""
