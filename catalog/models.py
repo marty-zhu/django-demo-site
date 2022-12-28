@@ -12,7 +12,7 @@ class Book(models.Model):
     summary = models.CharField(max_length=1000, help_text='A summary of the book\'s content')
     isbn = models.CharField('ISBN', max_length=13, help_text='The ISBN number of the book', unique=True, primary_key=True)
     genre = models.ManyToManyField('Genre', help_text='The genre(s) for this book')
-    language = models.ForeignKey('Language', on_delete=models.SET_NULL)
+    language = models.ForeignKey('Language', null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return f"{self.title} by {self.authors}"
