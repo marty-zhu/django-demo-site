@@ -4,6 +4,37 @@ from django.db import models
 from django.urls import reverse
 
 # Create your models here.
+class Author(models.Model):
+    """
+    Model representation of an author of a book.
+    A book can have multiple authors and an author can have multiple books.
+    """
+
+    first_name = models.CharField(max_length=20)
+    middle_initials = models.CharField(max_length=10, blank=True, null=True)
+    last_name = models.CharField(max_length=30)
+    birth_date = models.DateField('Born', blank=True, null=True)
+    death_date = models.DateField('Died', blank=True, null=True)
+
+    @property
+    def full_name(self):
+        """Returns the full name representation of the author."""
+        if self.middle_initials:
+            return ' '.join([self.first_name, self.middle_initials, self.last_name])
+        else:
+            return ' '.join([self.first_name, self.last_name])
+
+    class Meta:
+        ordering = ['last_name', 'first_name', 'birth_date']
+
+    def get_absolute_url(self):
+        """Returns the URL to access a detailed record for this author."""
+        return reverse("catalog:author-detail-view", kwargs={"pk": self.id})
+
+    def __str__(self):
+        """Human-readable string representation for validation."""
+        return self.full_name
+
 class Book(models.Model):
     """
     Model representation of a book with a unique ISBN,
@@ -67,38 +98,6 @@ class BookInstance(models.Model):
     def __str__(self):
         """Human-readable string representation for validation."""
         return f"{self.book} with ID {self.copy_id}"
-
-
-class Author(models.Model):
-    """
-    Model representation of an author of a book.
-    A book can have multiple authors and an author can have multiple books.
-    """
-
-    first_name = models.CharField(max_length=20)
-    middle_initials = models.CharField(max_length=10, blank=True, null=True)
-    last_name = models.CharField(max_length=30)
-    birth_date = models.DateField('Born', blank=True, null=True)
-    death_date = models.DateField('Died', blank=True, null=True)
-
-    @property
-    def full_name(self):
-        """Returns the full name representation of the author."""
-        if self.middle_initials:
-            return ' '.join([self.first_name, self.middle_initials, self.last_name])
-        else:
-            return ' '.join([self.first_name, self.last_name])
-
-    class Meta:
-        ordering = ['last_name', 'first_name', 'birth_date']
-
-    def get_absolute_url(self):
-        """Returns the URL to access a detailed record for this author."""
-        return reverse("catalog:author-detail-view", kwargs={"pk": self.id})
-
-    def __str__(self):
-        """Human-readable string representation for validation."""
-        return self.full_name
 
 
 class Genre(models.Model):
