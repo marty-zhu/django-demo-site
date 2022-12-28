@@ -66,8 +66,8 @@ class Authors(models.Model):
     first_name = models.CharField(max_length=20)
     middle_initials = models.CharField(max_length=10, blank=True, null=True)
     last_name = models.CharField(max_length=30)
-    birth_date = models.DateField()
-    death_date = models.DateField()
+    birth_date = models.DateField('Born', blank=True, null=True)
+    death_date = models.DateField('Died', blank=True, null=True)
 
     @property
     def full_name(self):
@@ -75,6 +75,12 @@ class Authors(models.Model):
             return ' '.join([self.first_name, self.middle_initials, self.last_name])
         else:
             return ' '.join([self.first_name, self.last_name])
+
+    class Meta:
+        ordering = ['last_name', 'first_name', 'birth_date']
+
+    def get_absolute_url(self):
+        return reverse("catalog:author-detail-view", kwargs={"pk": self.id})
 
     def __str__(self):
         return self.full_name
