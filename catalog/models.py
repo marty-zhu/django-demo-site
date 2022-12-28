@@ -18,7 +18,7 @@ class Book(models.Model):
         return f"{self.title} by {self.authors}"
 
     def get_absolute_url(self):
-        return reverse('catalog:book-detail-view', args=[str(self.isbn)])
+        return reverse('catalog:book-detail', args=[str(self.isbn)])
 
     class Meta:
         ordering = ['isbn', 'title']
@@ -71,7 +71,7 @@ class Authors(models.Model):
 
     @property
     def full_name(self):
-        if middle_initials:
+        if self.middle_initials:
             return ' '.join([self.first_name, self.middle_initials, self.last_name])
         else:
             return ' '.join([self.first_name, self.last_name])
@@ -104,7 +104,7 @@ class User(models.Model):
 
     @property
     def full_name(self):
-        if middle_initials:
+        if self.middle_initials:
             return ' '.join([self.first_name, self.middle_initials, self.last_name])
         else:
             return ' '.join([self.first_name, self.last_name])
