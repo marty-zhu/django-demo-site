@@ -1,3 +1,5 @@
+import uuid
+
 from django.db import models
 from django.urls import reverse
 
@@ -26,18 +28,34 @@ class BookInstance(models.Model):
     """
     An instance of the book in the catalog. This refers to each individual book that can be lent out under each Book title.
     """
-    uniqueId = models.CharField(max_length=20, help_text='The ID of the book in the catalog\'s stock', primary_key=True)
-    due_back = models.DateTimeField(blank=True, null=True)
-    book = models.ForeignKey(Book, on_delete=models.CASCADE)
-    imprint = models.CharField(max_length=30)
-    borrower = models.ForeignKey('User', on_delete=models.CASCADE)
+    STATUS_MAINTENANCE = 'm'
+    STATUS_LOANED = 'o'
+    STATUS_AVAILABLE = 'a'
+    STATUS_RESERVED = 'r'
 
-    @property
-    def status(self):
-        if due_back:
-            return 'Out on loan'
-        else:
-            return 'Available'
+    LOAN_STATUS = (
+        (STATUS_MAINTENANCE, 'Maintenance'),
+        (STATUS_LOANED, 'On Loan'),
+        (STATUS_AVAILABLE, 'Available'),
+        (STATUS_RESERVED, 'Reserved'),
+    )
+
+    id = models.UUIDField(default=uuid.uuid4, help_text='The ID of the book in the catalog\'s stock', primary_key=True)
+    loaned_on = models.DateTimeField(blank=True, null=True)
+    due_back = models.DateTimeField(blank=True, null=True)
+    book = models.ForeignKey(Book, on_delete=models.RESTRICT)
+    imprint = models.CharField(max_length=200)
+    borrower = models.ForeignKey('User', on_delete=models.RESTRICT)
+
+    status = models.CharField(
+        max_length=1,
+        choices=LOAN_STATUS,
+        default=STATUS_MAINTENANCE,
+        help_text='Book availability status'
+    )
+
+    class Meta:
+        ordering = ['due_back']
 
     def __str__(self):
         return f"{self.book} with ID {self.uniqueId}"
