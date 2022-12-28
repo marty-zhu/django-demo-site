@@ -12,7 +12,7 @@ class Book(models.Model):
 
     title = models.CharField(max_length=200, help_text='The title of the book')
     pub_date = models.DateField(help_text='The publication date')
-    authors = models.ManyToManyField('Authors', help_text='The name(s) of the author(s)')
+    authors = models.ManyToManyField('Author', help_text='The name(s) of the author(s)')
     summary = models.CharField(max_length=1000, help_text='A summary of the book\'s content')
     isbn = models.CharField('ISBN', max_length=13, help_text='The ISBN number of the book', unique=True, primary_key=True)
     genre = models.ManyToManyField('Genre', help_text='The genre(s) for this book')
@@ -69,7 +69,7 @@ class BookInstance(models.Model):
         return f"{self.book} with ID {self.copy_id}"
 
 
-class Authors(models.Model):
+class Author(models.Model):
     """
     Model representation of an author of a book.
     A book can have multiple authors and an author can have multiple books.
