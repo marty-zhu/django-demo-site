@@ -51,7 +51,7 @@ class Book(models.Model):
 
     def __str__(self):
         """Human-readable string representation for validation."""
-        return f"{self.title} by {self.authors[0].full_name}"
+        return f"{self.title} by {self.authors.all()[0].full_name}"
 
     def get_absolute_url(self):
         """Returns the URL to access a detailed record for this book."""
