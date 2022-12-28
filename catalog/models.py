@@ -8,7 +8,7 @@ class Book(models.Model):
 
     title = models.CharField(max_length=200, help_text='The title of the book')
     pub_date = models.DateField(help_text='The publication date')
-    authors = models.ManyToManyField('Authors', through='full_name', help_text='The name(s) of the author(s)', null=True, on_delete=models.RESTRICT)
+    authors = models.ManyToManyField('Authors', through='full_name', help_text='The name(s) of the author(s)', null=True)
     summary = models.CharField(max_length=1000, help_text='A summary of the book\'s content')
     isbn = models.CharField('ISBN', max_length=13, help_text='The ISBN number of the book', unique=True, primary_key=True)
     genre = models.ManyToManyField('Genre', help_text='The genre(s) for this book')
