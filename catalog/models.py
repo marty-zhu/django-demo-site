@@ -40,7 +40,7 @@ class BookInstance(models.Model):
         (STATUS_RESERVED, 'Reserved'),
     )
 
-    id = models.UUIDField(default=uuid.uuid4, help_text='The ID of the book in the catalog\'s stock', primary_key=True)
+    copy_id = models.UUIDField(default=uuid.uuid4, help_text='The ID of the book in the catalog\'s stock', primary_key=True)
     loaned_on = models.DateTimeField(blank=True, null=True)
     due_back = models.DateTimeField(blank=True, null=True)
     book = models.ForeignKey(Book, on_delete=models.RESTRICT)
@@ -58,7 +58,7 @@ class BookInstance(models.Model):
         ordering = ['due_back']
 
     def __str__(self):
-        return f"{self.book} with ID {self.id}"
+        return f"{self.book} with ID {self.copy_id}"
 
 
 class Authors(models.Model):
