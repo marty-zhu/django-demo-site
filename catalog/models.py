@@ -64,7 +64,7 @@ class BookInstance(models.Model):
 class Authors(models.Model):
 
     first_name = models.CharField(max_length=20)
-    middle_initials = models.CharField(max_length=10)
+    middle_initials = models.CharField(max_length=10, blank=True, null=True)
     last_name = models.CharField(max_length=30)
     birth_date = models.DateField()
     death_date = models.DateField()
@@ -99,7 +99,7 @@ class Language(models.Model):
 class User(models.Model):
 
     first_name = models.CharField(max_length=20)
-    middle_initials = models.CharField(max_length=10)
+    middle_initials = models.CharField(max_length=10, blank=True, null=True)
     last_name = models.CharField(max_length=30)
 
     @property
