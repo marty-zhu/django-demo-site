@@ -61,10 +61,10 @@ class Authors(models.Model):
 
 class Genre(models.Model):
 
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=200, help_text='Enter a book genre')
 
     def __str__(self):
-        return name
+        return self.name
 
 
 class Language(models.Model):
