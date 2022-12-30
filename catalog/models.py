@@ -135,9 +135,11 @@ class User(models.Model):
     Model representation of a user who can borrow more than zero books.
     """
 
+    prefix = models.CharField(max_length=4, blank=True, null=True)
     first_name = models.CharField(max_length=20)
     middle_initials = models.CharField(max_length=10, blank=True, null=True)
     last_name = models.CharField(max_length=30)
+    suffix = models.CharField(max_length=5, blank=True, null=True)
 
     @property
     def full_name(self):
