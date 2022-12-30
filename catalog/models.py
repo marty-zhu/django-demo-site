@@ -10,9 +10,14 @@ class Author(models.Model):
     A book can have multiple authors and an author can have multiple books.
     """
 
+    prefix = models.CharField(max_length=4, blank=True, null=True)
     first_name = models.CharField(max_length=20)
     middle_initials = models.CharField(max_length=10, blank=True, null=True)
     last_name = models.CharField(max_length=30)
+    suffix = models.CharField(max_length=5, blank=True, null=True)
+
+    name_str = models.CharField(max_length=69)
+
     birth_date = models.DateField('Born', blank=True, null=True)
     death_date = models.DateField('Died', blank=True, null=True)
 
