@@ -16,7 +16,7 @@ class Author(models.Model):
     last_name = models.CharField(max_length=30)
     suffix = models.CharField(max_length=5, blank=True, null=True)
 
-    name_str = models.CharField(max_length=69)
+    name_match_string = models.CharField(max_length=69)
 
     birth_date = models.DateField('Born', blank=True, null=True)
     death_date = models.DateField('Died', blank=True, null=True)
