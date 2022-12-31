@@ -3,6 +3,7 @@ import uuid
 
 from django.db import models
 from django.urls import reverse
+from django.contrib import admin
 
 # Create your models here.
 class Author(models.Model):
@@ -23,6 +24,7 @@ class Author(models.Model):
     death_date = models.DateField('Died', blank=True, null=True)
 
     @property
+    @admin.display()
     def full_name(self):
         """Returns the full name representation of the author."""
         cn_pattern = re.compile(r'[\u4e00-\u9fff]+')
@@ -63,6 +65,11 @@ class Book(models.Model):
         """Human-readable string representation for validation."""
         names = [author.full_name for author in self.authors.all()]
         return f"{self.title} by {', '.join(names) if len(names) > 1 else names[0]}"
+
+    @admin.display(description='author(s)')
+    def display_full_names(self):
+        names = [author.full_name for author in self.authors.all()]
+        return ', '.join(names) if len(names) > 1 else names[0]
 
     def get_absolute_url(self):
         """Returns the URL to access a detailed record for this book."""
