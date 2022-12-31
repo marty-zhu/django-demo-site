@@ -24,8 +24,8 @@ class Author(models.Model):
     @property
     def full_name(self):
         """Returns the full name representation of the author."""
-        if self.middle_initials:
-            return ' '.join([self.first_name, self.middle_initials, self.last_name])
+        if self.middle_names:
+            return ' '.join([self.first_name, self.middle_names, self.last_name])
         else:
             return ' '.join([self.first_name, self.last_name])
 
