@@ -85,7 +85,7 @@ class Book(models.Model):
 
 class BookInstance(models.Model):
     """
-    An instance of the book in the catalog.
+    An instance of the book in the catalog. In other words, a copy of the book in stock.
     This refers to each individual book that can be lent out under each Book title.
     """
     STATUS_MAINTENANCE = 'm'
