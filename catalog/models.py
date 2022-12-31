@@ -53,10 +53,10 @@ class Book(models.Model):
 
     title = models.CharField(max_length=200, help_text='The title of the book')
     pub_date = models.DateField(help_text='The publication date')
-    authors = models.ManyToManyField('Author', related_name='authors', help_text='The name(s) of the author(s)')
-    summary = models.CharField(max_length=1000, help_text='A summary of the book\'s content')
+    authors = models.ManyToManyField('Author', related_name='books', help_text='The name(s) of the author(s)')
+    summary = models.CharField(max_length=2000, help_text='A summary of the book\'s content')
     isbn = models.IntegerField('ISBN', help_text='The ISBN number of the book', unique=True, primary_key=True)
-    genre = models.ManyToManyField('Genre', related_name='genres', help_text='The genre(s) for this book')
+    genre = models.ManyToManyField('Genre', related_name='books', help_text='The genre(s) for this book')
     language = models.ForeignKey('Language', null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
