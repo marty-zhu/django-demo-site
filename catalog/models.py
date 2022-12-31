@@ -26,7 +26,10 @@ class Author(models.Model):
     @property
     @admin.display(description='full name', ordering='last_name')
     def full_name(self):
-        """Returns the full name representation of the author."""
+        """
+        Returns the full name representation of the author
+        for terminal and admin console.
+        """
         cn_pattern = re.compile(r'[\u4e00-\u9fff]+')
         if cn_pattern.search(self.last_name):
             return ' '.join([self.last_name, self.first_name])
@@ -62,12 +65,13 @@ class Book(models.Model):
     language = models.ForeignKey('Language', null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
-        """Human-readable string representation for validation."""
+        """Human-readable string representation for terminal validation."""
         names = [author.full_name for author in self.authors.all()]
         return f"{self.title} by {', '.join(names) if len(names) > 1 else names[0]}"
 
     @admin.display(description='author(s)')
     def display_full_names(self):
+        """Show full names in the admin console list inline display."""
         names = [author.full_name for author in self.authors.all()]
         return ', '.join(names) if len(names) > 1 else names[0]
 
