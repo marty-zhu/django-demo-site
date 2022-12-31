@@ -1,6 +1,9 @@
 import re
 import uuid
 
+from datetime import timedelta
+from django.utils import timezone
+
 from django.db import models
 from django.urls import reverse
 from django.contrib import admin
@@ -121,16 +124,20 @@ class BookInstance(models.Model):
         """Human-readable string representation for validation."""
         return f"{self.book} with ID {self.copy_id}"
 
-    def _update_status(self):
+    def _update_status(self, status):
         """Helper method to update book status."""
-        pass
+        self.status=status
 
     def loan(self):
         """
         Automatically sets the loan out, due back, and status information
         when a book is being loaned out.
         """
-        pass
+        period = timedelta(days=14)
+        self.loaned_on = timezone.now()
+        self.due_back = self.loaned_on + period
+        self._update_status(self.STATUS_LOANED)
+        return f"{self.book.title} {self.copy_id} loaned on {self.loaned_on}"
 
 
 class Genre(models.Model):
