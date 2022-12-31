@@ -12,7 +12,7 @@ class Author(models.Model):
 
     prefix = models.CharField(max_length=4, blank=True, null=True)
     first_name = models.CharField(max_length=20)
-    middle_initials = models.CharField(max_length=10, blank=True, null=True)
+    middle_names = models.CharField(max_length=30, blank=True, null=True)
     last_name = models.CharField(max_length=30)
     suffix = models.CharField(max_length=5, blank=True, null=True)
 
