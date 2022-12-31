@@ -24,7 +24,7 @@ class Author(models.Model):
     death_date = models.DateField('Died', blank=True, null=True)
 
     @property
-    @admin.display()
+    @admin.display(description='full name', ordering='last_name')
     def full_name(self):
         """Returns the full name representation of the author."""
         cn_pattern = re.compile(r'[\u4e00-\u9fff]+')

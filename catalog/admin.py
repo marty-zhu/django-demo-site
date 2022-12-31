@@ -16,7 +16,7 @@ class BookAdmin(admin.ModelAdmin):
     inlines = [BookInstanceInline]
 
 class AuthorAdmin(admin.ModelAdmin):
-    list_display = ('last_name', 'first_name', 'birth_date', 'death_date')
+    list_display = ('full_name', 'birth_date', 'death_date')
 
 admin.site.register(Book, BookAdmin)
 # admin.site.register(BookInstance)
