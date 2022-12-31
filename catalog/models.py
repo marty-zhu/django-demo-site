@@ -1,3 +1,4 @@
+import re
 import uuid
 
 from django.db import models
@@ -24,10 +25,14 @@ class Author(models.Model):
     @property
     def full_name(self):
         """Returns the full name representation of the author."""
-        if self.middle_names:
-            return ' '.join([self.first_name, self.middle_names, self.last_name])
+        cn_pattern = re.compile(r'[\u4e00-\u9fff]+')
+        if cn_pattern.search(self.last_name):
+            return ' '.join([self.last_name, self.first_name])
         else:
-            return ' '.join([self.first_name, self.last_name])
+            if self.middle_names:
+                return ' '.join([self.first_name, self.middle_names, self.last_name])
+            else:
+                return ' '.join([self.first_name, self.last_name])
 
     class Meta:
         ordering = ['last_name', 'first_name', 'birth_date']
@@ -64,7 +69,7 @@ class Book(models.Model):
         return reverse('catalog:book-detail-view', kwargs={'pk': self.id})
 
     class Meta:
-        ordering = ['isbn', 'title']
+        ordering = ['title']
 
 
 class BookInstance(models.Model):
