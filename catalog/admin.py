@@ -9,8 +9,8 @@ class BookInstanceInline(admin.TabularInline):
 
 class BookAdmin(admin.ModelAdmin):
     fields = [
-        'title', 'authors', 'pub_date', 'isbn',
-        'genre', 'language', 'summary'
+        # 'title', 'authors', 'pub_date', 'isbn',
+        # 'genre', 'language', 'summary'
     ]
     inlines = [BookInstanceInline]
 
