@@ -121,6 +121,17 @@ class BookInstance(models.Model):
         """Human-readable string representation for validation."""
         return f"{self.book} with ID {self.copy_id}"
 
+    def _update_status(self):
+        """Helper method to update book status."""
+        pass
+
+    def loan(self):
+        """
+        Automatically sets the loan out, due back, and status information
+        when a book is being loaned out.
+        """
+        pass
+
 
 class Genre(models.Model):
     """
