@@ -72,11 +72,18 @@ class Book(models.Model):
         names = [author.full_name for author in self.authors.all()]
         return f"{self.title} by {', '.join(names) if len(names) > 1 else names[0]}"
 
+    @property
     @admin.display(description='author(s)')
     def display_full_names(self):
         """Show full names in the admin console list inline display."""
         names = [author.full_name for author in self.authors.all()]
         return ', '.join(names) if len(names) > 1 else names[0]
+
+    @property
+    def display_genres(self):
+        """Show all genre categories the book covers."""
+        genres = [genre.name for genre in self.genre.all()]
+        return ', '.join(genres) if len(genres) > 1 else genres[0]
 
     def get_absolute_url(self):
         """Returns the URL to access a detailed record for this book."""
