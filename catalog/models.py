@@ -118,7 +118,7 @@ class BookInstance(models.Model):
     )
 
     class Meta:
-        ordering = ['due_back']
+        ordering = ['status', 'loaned_on', 'due_back']
 
     def __str__(self):
         """Human-readable string representation for validation."""
