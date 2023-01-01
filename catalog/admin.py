@@ -10,14 +10,24 @@ class BookInstanceInline(admin.TabularInline):
 
 class BookAdmin(admin.ModelAdmin):
     fields = [
-        # 'title', 'authors', 'pub_date', 'isbn',
-        # 'genre', 'language', 'summary'
+        'title', 'authors', 'summary',
+        ('isbn', 'genre', 'language')
     ]
     list_display = ('title', 'display_full_names', 'language')
     inlines = [BookInstanceInline]
 
+class BookAuthorM2MInline(admin.TabularInline):
+    model = Book.authors.through
+    extra = 0
+
 class AuthorAdmin(admin.ModelAdmin):
     list_display = ('full_name', 'birth_date', 'death_date')
+    fields = [
+        'prefix', ('first_name', 'middle_names', 'last_name'),
+        'suffix', ('birth_date', 'death_date')
+    ]
+    inlines = [BookAuthorM2MInline]
+
 
 admin.site.register(Book, BookAdmin)
 # admin.site.register(BookInstance)
