@@ -108,7 +108,7 @@ class BookInstance(models.Model):
     due_back = models.DateTimeField(blank=True, null=True)
     book = models.ForeignKey(Book, on_delete=models.RESTRICT)
     imprint = models.CharField(max_length=200)
-    borrower = models.ForeignKey('User', on_delete=models.RESTRICT)
+    borrower = models.ForeignKey('User', blank=True, null=True, on_delete=models.RESTRICT)
 
     status = models.CharField(
         max_length=1,
