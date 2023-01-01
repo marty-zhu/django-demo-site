@@ -1,10 +1,20 @@
 * {
     font-family: Helvetica, sans-serif;
+    padding: 0;
+    margin: 0;
 }
 
 ul.navbar {
     list-style: none;
     width: 10vw;
+    background-color: darkolivegreen;
+    padding: 1rem;
+}
+
+ul.navbar a {
+    text-decoration: none;
+    color: ivory;
+    font-size: larger;
 }
 
 body {
@@ -17,9 +27,16 @@ div.container {
     flex-flow: column nowrap;
     height: 100vh;
     justify-content: space-between;
+    align-items: stretch;
+    color: darkslategray;
+}
+
+main.container {
+    padding: 2rem;
 }
 
 footer {
+    background-color: honeydew;
     padding: 2rem;
     text-align: center;
 }
