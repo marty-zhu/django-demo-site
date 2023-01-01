@@ -13,8 +13,12 @@
 <body>
 
     {% include 'catalog/side_navbar.html' %}
-    {% block content %}{% endblock content %}
-    {% include 'catalog/footer.html' %}
+    <div class="container">
+        <main class="container">
+            {% block content %}{% endblock content %}
+        </main>
+        {% include 'catalog/footer.html' %}
+    </div>
     
 </body>
 </html>

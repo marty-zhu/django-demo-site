@@ -1,3 +1,25 @@
-ul {
+* {
+    font-family: Helvetica, sans-serif;
+}
+
+ul.navbar {
     list-style: none;
+    width: 10vw;
+}
+
+body {
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+div.container {
+    display: flex;
+    flex-flow: column nowrap;
+    height: 100vh;
+    justify-content: space-between;
+}
+
+footer {
+    padding: 2rem;
+    text-align: center;
 }
