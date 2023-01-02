@@ -1,0 +1,15 @@
+{% extends 'catalog/base_generic.html' %}
+
+{% block content %}
+    <h1>Welcome to Marty's Library</h1>
+    <h2>The library currently features the following languages:</h2>
+    {% if list_of_all_languages %}
+    <ul class="content-list">
+        {% for lang in list_of_all_languages %}
+        <li class="content-item">{{ lang.full_name }}</li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>There are no language categories yet.</p>
+    {% endif %}
+{% endblock content %}
