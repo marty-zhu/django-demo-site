@@ -18,3 +18,11 @@ def index(request):
         'num_language': num_language,
     }
     return HttpResponse(template.render(context, request))
+
+def books(request):
+    list_of_all_books = Book.objects.all()
+    template = loader.get_template('catalog/books.html')
+    context = {
+        'list_of_all_books': list_of_all_books,
+    }
+    return HttpResponse(template.render(context, request))
