@@ -1,0 +1,15 @@
+{% extends 'catalog/base_generic.html' %}
+
+{% block content %}
+    <h1>Welcome to Marty's Library</h1>
+    <h2>The library currently features the following genres:</h2>
+    {% if list_of_all_genres %}
+    <ul class="content-list">
+        {% for genre in list_of_all_genres %}
+        <li class="content-item">{{ genre.name }}</li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>There are no genres yet.</p>
+    {% endif %}
+{% endblock content %}
