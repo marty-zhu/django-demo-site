@@ -2,24 +2,13 @@
 
 {% block content %}
     <h1>Welcome to Marty's Library</h1>
-    <h2>The library currently has the following books:</h2>
+    <p>
+        The library currently has {{ num_books }} books,
+        written by {{ num_authors }} authors,
+        across {{ num_genres }} genres,
+        in {{ num_language }} languages.
+    </p>
+    <br>
+    <p>Click the links in the left panel to take a look.</p>
     {% comment %} TODO: change from HTML list format to table {% endcomment %}
-    {% if list_of_all_books %}
-    <table id="book-list" class="list-table">
-        <tr class="table-header">
-            <th class="table-col-header">Title</th>
-            <th class="table-col-header">Author(s)</th>
-            <th class="table-col-header">Genre(s)</th>
-        </tr>
-        {% for book in list_of_all_books %}
-        <tr class="table-data">
-            <td>{{ book.title }}</td>
-            <td>{{ book.display_full_names }}</td>
-            <td>{{ book.display_genres }}</td>
-        </tr>
-        {% endfor %}
-    </table>
-    {% else %}
-    <p>No books where found.</p>
-    {% endif %}
 {% endblock content %}
