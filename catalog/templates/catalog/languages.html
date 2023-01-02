@@ -6,7 +6,7 @@
     {% if list_of_all_languages %}
     <ul class="content-list">
         {% for lang in list_of_all_languages %}
-        <li class="content-item">{{ lang.full_name }}</li>
+        <li class="content-item">{{ lang.name }}</li>
         {% endfor %}
     </ul>
     {% else %}
