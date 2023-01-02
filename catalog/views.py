@@ -5,6 +5,7 @@ from django.template import loader
 from .models import *
 
 # Create your views here.
+# TODO: refactor to generic views to reduce redundancy
 def index(request):
     num_books = Book.objects.all().count()
     num_authors = Author.objects.all().count()
