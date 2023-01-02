@@ -42,3 +42,11 @@ def genres(request):
         'list_of_all_genres': list_of_all_genres,
     }
     return HttpResponse(template.render(context, request))
+
+def languages(request):
+    list_of_all_languages = Language.objects.all()
+    template = loader.get_template('catalog/languages.html')
+    context = {
+        'list_of_all_languages': list_of_all_languages,
+    }
+    return HttpResponse(template.render(context, request))
