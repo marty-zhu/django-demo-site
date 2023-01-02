@@ -1,0 +1,15 @@
+{% extends 'catalog/base_generic.html' %}
+
+{% block content %}
+    <h1>Welcome to Marty's Library</h1>
+    <h2>The library currently features the following authors:</h2>
+    {% if list_of_all_authors %}
+    <ul class="content-list">
+        {% for author in list_of_all_authors %}
+        <li class="content-item">{{ author.full_name }}</li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>There are no authors yet.</p>
+    {% endif %}
+{% endblock content %}
