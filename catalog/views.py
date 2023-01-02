@@ -34,3 +34,11 @@ def authors(request):
         'list_of_all_authors': list_of_all_authors,
     }
     return HttpResponse(template.render(context, request))
+
+def genres(request):
+    list_of_all_genres = Genre.objects.all()
+    template = loader.get_template('catalog/genres.html')
+    context = {
+        'list_of_all_genres': list_of_all_genres,
+    }
+    return HttpResponse(template.render(context, request))
