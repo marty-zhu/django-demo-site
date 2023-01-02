@@ -26,3 +26,11 @@ def books(request):
         'list_of_all_books': list_of_all_books,
     }
     return HttpResponse(template.render(context, request))
+
+def authors(request):
+    list_of_all_authors = Author.objects.all()
+    template = loader.get_template('catalog/authors.html')
+    context = {
+        'list_of_all_authors': list_of_all_authors,
+    }
+    return HttpResponse(template.render(context, request))
