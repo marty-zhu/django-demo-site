@@ -36,6 +36,11 @@ class BookListView(generic.ListView):
     template_name = 'catalog/books.html'
     context_object_name = 'list_of_all_books'
 
+class BookDetailView(generic.DetailView):
+    model = Book
+    template_name = 'catalog/book_detail.html'
+    context_object_name = 'book_detail_info'
+
 def authors(request):
     list_of_all_authors = Author.objects.all()
     template = loader.get_template('catalog/authors.html')
