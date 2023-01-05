@@ -1,0 +1,20 @@
+{% extends 'catalog/base_generic.html' %}
+
+{% block content %}
+    {% if book_detail_info %}
+    <h1>Title: {{ book_detail_info.title }}</h1>
+    <ul>
+        <li class="list-item"><strong>Author(s):</strong> <a href="">{{ book_detail_info.display_full_names }}</a></li>
+        <li class="list-item"><strong>Summary:</strong>
+            <p>{{ book_detail_info.summary }}</p>
+        </li>
+        <li class="list-item"><strong>Publication Date:</strong> {{ book_detail_info.pub_date }}</li>
+        <li class="list-item"><strong>ISBN:</strong> {{ book_detail_info.isbn }}</li>
+        <li class="list-item"><strong>Genre(s):</strong> {{ book_detail_info.display_genres }}</li>
+        <li class="list-item"><strong>Language:</strong> {{ book_detail_info.language }}</li>
+    </ul>
+    {% comment %} TODO: add book instance interface {% endcomment %}
+    {% else %}
+    <p>There are currently no information on this book.</p>
+    {% endif %}
+{% endblock content %}
