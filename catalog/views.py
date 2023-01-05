@@ -38,7 +38,7 @@ class BookListView(generic.ListView):
 
 class BookDetailView(generic.DetailView):
     model = Book
-    template_name = 'catalog/book_detail.html'
+    template_name = 'catalog/book_details.html'
     context_object_name = 'book_detail_info'
 
 def authors(request):
