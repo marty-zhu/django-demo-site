@@ -87,7 +87,7 @@ class Book(models.Model):
 
     def get_absolute_url(self):
         """Returns the URL to access a detailed record for this book."""
-        return reverse('catalog:book-detail-view', kwargs={'pk': self.id})
+        return reverse('catalog:book-detail-view', kwargs={'pk': self.isbn})
 
     class Meta:
         ordering = ['title']
