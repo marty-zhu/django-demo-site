@@ -1,6 +1,7 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.template import loader
+from django.views import generic
 
 from .models import *
 
@@ -20,13 +21,20 @@ def index(request):
     }
     return HttpResponse(template.render(context, request))
 
-def books(request):
-    list_of_all_books = Book.objects.all()
-    template = loader.get_template('catalog/books.html')
-    context = {
-        'list_of_all_books': list_of_all_books,
-    }
-    return HttpResponse(template.render(context, request))
+# Switched to Class-based views
+#
+# def books(request):
+#     list_of_all_books = Book.objects.all()
+#     template = loader.get_template('catalog/books.html')
+#     context = {
+#         'list_of_all_books': list_of_all_books,
+#     }
+#     return HttpResponse(template.render(context, request))
+
+class BookListView(generic.ListView):
+    model = Book
+    template_name = 'catalog/books.html'
+    context_object_name = 'list_of_all_books'
 
 def authors(request):
     list_of_all_authors = Author.objects.all()
