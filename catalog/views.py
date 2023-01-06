@@ -41,13 +41,18 @@ class BookDetailView(generic.DetailView):
     template_name = 'catalog/book_details.html'
     context_object_name = 'book_detail_info'
 
-def authors(request):
-    list_of_all_authors = Author.objects.all()
-    template = loader.get_template('catalog/authors.html')
-    context = {
-        'list_of_all_authors': list_of_all_authors,
-    }
-    return HttpResponse(template.render(context, request))
+class AuthorListView(generic.ListView):
+    model = Author
+    template_name = 'catalog/authors.html'
+    context_object_name = 'list_of_all_authors'
+
+# def authors(request):
+#     list_of_all_authors = Author.objects.all()
+#     template = loader.get_template('catalog/authors.html')
+#     context = {
+#         'list_of_all_authors': list_of_all_authors,
+#     }
+#     return HttpResponse(template.render(context, request))
 
 def genres(request):
     list_of_all_genres = Genre.objects.all()
