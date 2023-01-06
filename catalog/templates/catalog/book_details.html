@@ -5,7 +5,11 @@
     <h1>Title: {{ book_detail_info.title }}</h1>
     <section id="book-info" class="info-section">
         <ul class="descr-list">
-            <li class="list-item"><strong>Author(s):</strong> <a href="">{{ book_detail_info.display_full_names }}</a></li>
+            <li class="list-item"><strong>Author(s):</strong>
+                {% for author in book_detail_info.authors.all %}
+                    <a href="{{ author.get_absolute_url }}">{{ author.full_name }}</a>,
+                {% endfor %}
+            </li>
             <li class="list-item"><strong>Summary:</strong>
                 <p>{{ book_detail_info.summary }}</p>
             </li>
