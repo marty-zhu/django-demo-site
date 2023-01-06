@@ -3,17 +3,37 @@
 {% block content %}
     {% if book_detail_info %}
     <h1>Title: {{ book_detail_info.title }}</h1>
-    <ul>
-        <li class="list-item"><strong>Author(s):</strong> <a href="">{{ book_detail_info.display_full_names }}</a></li>
-        <li class="list-item"><strong>Summary:</strong>
-            <p>{{ book_detail_info.summary }}</p>
-        </li>
-        <li class="list-item"><strong>Publication Date:</strong> {{ book_detail_info.pub_date }}</li>
-        <li class="list-item"><strong>ISBN:</strong> {{ book_detail_info.isbn }}</li>
-        <li class="list-item"><strong>Genre(s):</strong> {{ book_detail_info.display_genres }}</li>
-        <li class="list-item"><strong>Language:</strong> {{ book_detail_info.language }}</li>
-    </ul>
-    {% comment %} TODO: add book instance interface {% endcomment %}
+    <section id="book-info" class="info-section">
+        <ul class="descr-list">
+            <li class="list-item"><strong>Author(s):</strong> <a href="">{{ book_detail_info.display_full_names }}</a></li>
+            <li class="list-item"><strong>Summary:</strong>
+                <p>{{ book_detail_info.summary }}</p>
+            </li>
+            <li class="list-item"><strong>Publication Date:</strong> {{ book_detail_info.pub_date }}</li>
+            <li class="list-item"><strong>ISBN:</strong> {{ book_detail_info.isbn }}</li>
+            <li class="list-item"><strong>Genre(s):</strong> {{ book_detail_info.display_genres }}</li>
+            <li class="list-item"><strong>Language:</strong> {{ book_detail_info.language }}</li>
+        </ul>
+    </section>
+    <section id="copies-info" class="info-section">
+        {% if book_detail_info.bookinstance_set %}
+        <h2>Copies for loan:</h2>
+        <table class="descr-table">
+            <tr class="table-header-row">
+                <th>Title</th>
+                <th>Availability</th>
+            </tr>
+            {% for copy in book_detail_info.bookinstance_set.all() %}
+            <tr class="table-data-row">
+                <td>{{ copy.copy_id }}</td>
+                <td>{{ copy.status }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <p>There are currently no copies in stock.</p>
+        {% endif %}
+    </section>
     {% else %}
     <p>There are currently no information on this book.</p>
     {% endif %}
