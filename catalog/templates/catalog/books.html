@@ -13,7 +13,11 @@
         {% for book in list_of_all_books %}
         <tr class="table-data">
             <td><a href="{{ book.get_absolute_url }}">{{ book.title }}</a></td>
-            <td>{{ book.display_full_names }}</td>
+            <td>
+                {% for author in book.authors.all %}
+                <a href="{{ author.get_absolute_url }}">{{ author.full_name }}</a>, 
+                {% endfor %}
+            </td>
             <td>{{ book.display_genres }}</td>
         </tr>
         {% endfor %}
