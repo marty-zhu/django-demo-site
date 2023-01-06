@@ -46,7 +46,7 @@ class AuthorListView(generic.ListView):
     template_name = 'catalog/authors.html'
     context_object_name = 'list_of_all_authors'
 
-class AuthorDetailView(generic.DeleteView):
+class AuthorDetailView(generic.DetailView):
     model = Author
     template_name = 'catalog/author_details.html'
     context_object_name = 'author'
