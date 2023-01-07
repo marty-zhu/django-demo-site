@@ -9,8 +9,16 @@
             <li class="list-item"><strong>Died:</strong> {{ author.death_date }}</li>
         </ul>
     </section>
-    {% comment %} TODO: add list of books authored {% endcomment %}
-    <section id="author-books-info" class="info-section"></section>
+    <section id="author-books-info" class="info-section">
+        <h2>The author wrote the following books:</h2>
+        {% if author.books %}
+        <ul class="descr-list">
+            {% for book in author.books.all %}
+            <li class="list-item"><a href="{{ book.get_absolute_url }}">{{ book.title }}</a></li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </section>
     {% else %}
     <p>There are currently no information on this author.</p>
     {% endif %}
