@@ -12,11 +12,20 @@
     <section id="author-books-info" class="info-section">
         <h2>The author wrote the following books:</h2>
         {% if author.books %}
-        <ul class="descr-list">
+        <table class="descr-table">
+            <tr class="table-header">
+                <td>Title</td>
+                <td>Publication Date</td>
+            </tr>
             {% for book in author.books.all %}
-            <li class="list-item"><a href="{{ book.get_absolute_url }}">{{ book.title }}</a></li>
+            <tr class="table-data">
+                <td><a href="{{ book.get_absolute_url }}">{{ book.title }}</a></td>
+                <td>{{ book.pub_date }}</td>
+            </tr>
             {% endfor %}
-        </ul>
+        </table>
+        {% else %}
+        <p>There are currently no books under this author in the library.</p>
         {% endif %}
     </section>
     {% else %}
