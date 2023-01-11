@@ -2,3 +2,4 @@
 *.pyc
 book_io_utils.py
 fabrication_utils
+pytest.ini
