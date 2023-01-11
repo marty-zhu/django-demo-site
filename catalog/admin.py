@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Book, BookInstance, Author, Genre, Language, User
+from .models import Book, BookInstance, Author, Genre, Language #, User
 
 # Register your models here.
 class BookInstanceInline(admin.TabularInline):
@@ -34,4 +34,4 @@ admin.site.register(Book, BookAdmin)
 admin.site.register(Author, AuthorAdmin)
 admin.site.register(Genre)
 admin.site.register(Language)
-admin.site.register(User)
+# admin.site.register(User)

@@ -7,6 +7,7 @@ from django.utils import timezone
 from django.db import models
 from django.urls import reverse
 from django.contrib import admin
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Author(models.Model):
@@ -115,7 +116,7 @@ class BookInstance(models.Model):
     due_back = models.DateTimeField(blank=True, null=True)
     book = models.ForeignKey(Book, on_delete=models.RESTRICT)
     imprint = models.CharField(max_length=200)
-    borrower = models.ForeignKey('User', blank=True, null=True, on_delete=models.RESTRICT)
+    borrower = models.ForeignKey(User, blank=True, null=True, on_delete=models.RESTRICT)
 
     status = models.CharField(
         max_length=1,
@@ -172,25 +173,25 @@ class Language(models.Model):
         return self.name
 
 
-class User(models.Model):
-    """
-    Model representation of a user who can borrow more than zero books.
-    """
+# class User(models.Model):
+#     """
+#     Model representation of a user who can borrow more than zero books.
+#     """
 
-    prefix = models.CharField(max_length=4, blank=True, null=True)
-    first_name = models.CharField(max_length=20)
-    middle_initials = models.CharField(max_length=10, blank=True, null=True)
-    last_name = models.CharField(max_length=30)
-    suffix = models.CharField(max_length=5, blank=True, null=True)
+#     prefix = models.CharField(max_length=4, blank=True, null=True)
+#     first_name = models.CharField(max_length=20)
+#     middle_initials = models.CharField(max_length=10, blank=True, null=True)
+#     last_name = models.CharField(max_length=30)
+#     suffix = models.CharField(max_length=5, blank=True, null=True)
 
-    @property
-    def full_name(self):
-        """Returns the full name representation of the user."""
-        if self.middle_initials:
-            return ' '.join([self.first_name, self.middle_initials, self.last_name])
-        else:
-            return ' '.join([self.first_name, self.last_name])
+#     @property
+#     def full_name(self):
+#         """Returns the full name representation of the user."""
+#         if self.middle_initials:
+#             return ' '.join([self.first_name, self.middle_initials, self.last_name])
+#         else:
+#             return ' '.join([self.first_name, self.last_name])
 
-    def __str__(self):
-        """Human-readable string representation for validation."""
-        return self.full_name
+#     def __str__(self):
+#         """Human-readable string representation for validation."""
+#         return self.full_name
