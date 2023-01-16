@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-# from django.views.generic import RedirectView
+from django.views.generic import RedirectView
 # from django.conf import settings
 # from django.conf.urls.static import static
 
@@ -25,6 +25,7 @@ urlpatterns = [
     path('polls/', include('polls.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),
+    path('', RedirectView.as_view(url='catalog/', permanent=True)),
 ]
 
 # For cases where we want to redirect the root, '/', to the app

@@ -128,4 +128,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Setting to have login redirected to catalog app
-LOGIN_REDIRECT_URL = 'catalog/'
+LOGIN_REDIRECT_URL = ''
