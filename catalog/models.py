@@ -1,7 +1,7 @@
 import re
 import uuid
 
-from datetime import timedelta
+from datetime import date, timedelta
 from django.utils import timezone
 
 from django.db import models
@@ -146,6 +146,11 @@ class BookInstance(models.Model):
         self.due_back = self.loaned_on + period
         self._update_status(self.STATUS_LOANED)
         return f"{self.book.title} {self.copy_id} loaned on {self.loaned_on}"
+
+    @property
+    def is_overdue(self):
+        """Test if the book is overdue based on current date."""
+        return bool(self.due_back < date.today()) if self.due_back else False
 
 
 class Genre(models.Model):
