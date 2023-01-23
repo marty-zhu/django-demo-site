@@ -124,8 +124,8 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Setting to have demo reset emails sent to the console
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
 # Setting to have login redirected to catalog app
 LOGIN_REDIRECT_URL = ''
+
+# Setting to have demo reset emails sent to the console
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
