@@ -115,7 +115,7 @@ class BookInstance(models.Model):
     loaned_on = models.DateTimeField(blank=True, null=True)
     due_back = models.DateTimeField(blank=True, null=True)
     book = models.ForeignKey(Book, on_delete=models.RESTRICT)
-    imprint = models.CharField(max_length=200)
+    imprint = models.CharField(max_length=200, blank=True, null=True)
     borrower = models.ForeignKey(User, blank=True, null=True, on_delete=models.RESTRICT)
 
     status = models.CharField(
