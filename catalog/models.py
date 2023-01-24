@@ -61,7 +61,7 @@ class Book(models.Model):
     """
 
     title = models.CharField(max_length=200, help_text='The title of the book')
-    pub_date = models.DateField(help_text='The publication date')
+    pub_date = models.DateField(help_text='The publication date', blank=True, null=True)
     authors = models.ManyToManyField('Author', related_name='books', help_text='The name(s) of the author(s)')
     summary = models.CharField(max_length=2000, help_text='A summary of the book\'s content')
     isbn = models.IntegerField('ISBN', help_text='The ISBN number of the book', unique=True, primary_key=True)
@@ -115,7 +115,7 @@ class BookInstance(models.Model):
     loaned_on = models.DateTimeField(blank=True, null=True)
     due_back = models.DateTimeField(blank=True, null=True)
     book = models.ForeignKey(Book, on_delete=models.RESTRICT)
-    imprint = models.CharField(max_length=200, blank=True, null=True)
+    imprint = models.CharField(max_length=200)
     borrower = models.ForeignKey(User, blank=True, null=True, on_delete=models.RESTRICT)
 
     status = models.CharField(
