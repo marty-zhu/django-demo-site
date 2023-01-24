@@ -6,7 +6,7 @@ from .models import Book, BookInstance, Author, Genre, Language #, User
 class BookInstanceInline(admin.TabularInline):
     model = BookInstance
     extra = 0
-    fields = ('status', 'loaned_on', 'due_back')
+    fields = ('status', 'loaned_on', 'due_back', 'borrower')
 
 class BookAdmin(admin.ModelAdmin):
     fields = [
