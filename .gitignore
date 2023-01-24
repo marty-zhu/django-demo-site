@@ -1,5 +1,5 @@
 .DS_Store
 *.pyc
-book_io_utils.py
 fabrication_utils
 pytest.ini
+db.sqlite3
