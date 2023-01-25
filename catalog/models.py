@@ -64,7 +64,7 @@ class Book(models.Model):
     pub_date = models.DateField(help_text='The publication date', blank=True, null=True)
     authors = models.ManyToManyField('Author', related_name='books', help_text='The name(s) of the author(s)')
     summary = models.CharField(max_length=2000, help_text='A summary of the book\'s content')
-    isbn = models.IntegerField('ISBN', help_text='The ISBN number of the book', unique=True, primary_key=True)
+    isbn = models.IntegerField('ISBN', help_text='The ISBN number of the book', unique=True, primary_key=True, editable=False)
     genre = models.ManyToManyField('Genre', related_name='books', help_text='The genre(s) for this book')
     language = models.ForeignKey('Language', null=True, on_delete=models.SET_NULL)
 
@@ -111,11 +111,11 @@ class BookInstance(models.Model):
         (STATUS_RESERVED, 'Reserved'),
     )
 
-    copy_id = models.UUIDField(default=uuid.uuid4, help_text='The ID of the book in the catalog\'s stock', primary_key=True)
+    copy_id = models.UUIDField(default=uuid.uuid4, help_text='The ID of the book in the catalog\'s stock', primary_key=True, editable=False)
     loaned_on = models.DateTimeField(blank=True, null=True)
     due_back = models.DateTimeField(blank=True, null=True)
     book = models.ForeignKey(Book, on_delete=models.RESTRICT)
-    imprint = models.CharField(max_length=200)
+    imprint = models.CharField(max_length=200, blank=True)
     borrower = models.ForeignKey(User, blank=True, null=True, on_delete=models.RESTRICT)
 
     status = models.CharField(
