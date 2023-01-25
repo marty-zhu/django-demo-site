@@ -31,6 +31,10 @@ class BookAdmin(admin.ModelAdmin):
     list_display = ('title', 'display_full_names', 'language')
     inlines = [BookInstanceInline]
 
+class BookInstanceAdmin(admin.ModelAdmin):
+    list_display = ('book', 'copy_id', 'status', 'borrower')
+    search_fields = ['book__title', 'borrower__username']  # related field search
+
 class BookAuthorM2MInline(admin.TabularInline):
     model = Book.authors.through
     extra = 0
@@ -45,7 +49,7 @@ class AuthorAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Book, BookAdmin)
-admin.site.register(BookInstance)
+admin.site.register(BookInstance, BookInstanceAdmin)
 admin.site.register(Author, AuthorAdmin)
 admin.site.register(Genre)
 admin.site.register(Language)

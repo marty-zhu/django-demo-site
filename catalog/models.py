@@ -130,7 +130,8 @@ class BookInstance(models.Model):
 
     def __str__(self):
         """Human-readable string representation for validation."""
-        return f"{self.book} with ID {self.copy_id}"
+        copy_id = str(self.copy_id)
+        return f"{self.book} with ID ending with ..{copy_id[-6:]}"
 
     def _update_status(self, status):
         """Helper method to update book status."""
