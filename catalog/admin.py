@@ -32,8 +32,22 @@ class BookAdmin(admin.ModelAdmin):
     inlines = [BookInstanceInline]
 
 class BookInstanceAdmin(admin.ModelAdmin):
+    readonly_fields = ('copy_id',)
+    
+    # for main list display
     list_display = ('book', 'copy_id', 'status', 'borrower')
+    list_filter = ('status', 'due_back')
     search_fields = ['book__title', 'borrower__username']  # related field search
+
+    # for detail page on individual book instance
+    fieldsets = (
+        (None, {
+            'fields': ('book', 'imprint', 'copy_id')
+        }),
+        ('Availability', {
+            'fields': ('status', 'due_back', 'borrower')
+        }),
+    )
 
 class BookAuthorM2MInline(admin.TabularInline):
     model = Book.authors.through
