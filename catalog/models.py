@@ -151,7 +151,7 @@ class BookInstance(models.Model):
     @property
     def is_overdue(self):
         """Test if the book is overdue based on current date."""
-        return bool(self.due_back < date.today()) if self.due_back else False
+        return bool(self.due_back.date() < date.today()) if self.due_back else False
 
 
 class Genre(models.Model):
