@@ -6,6 +6,7 @@
     <li class="navlink"><a href="{% url 'catalog:languages' %}"><strong>Language</strong></a></li>
     {% if user.is_authenticated %}
     <li id="username" class="user-util">User: {{ user.get_username }}</li>
+    <li id="user-books" class="user-util"><a href="{% url 'catalog:my-borrowed' %}">My Books</a></li>
     <li class="user-util"><a href="{% url 'logout' %}?next={{ request.path }}">Logout</a></li>
     {% else %}
     <li class="user-util"><a href="{% url 'login' %}?next={{ request.path }}">Login</a></li>
