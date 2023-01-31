@@ -3,6 +3,8 @@ from django.shortcuts import render, get_object_or_404
 from django.template import loader
 from django.views import generic
 
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 from .models import *
 
 # Create your views here.
@@ -36,24 +38,24 @@ def index(request):
 #     }
 #     return HttpResponse(template.render(context, request))
 
-class BookListView(generic.ListView):
+class BookListView(LoginRequiredMixin, generic.ListView):
     model = Book
     template_name = 'catalog/books.html'
     context_object_name = 'list_of_all_books'
     paginate_by = 10
 
-class BookDetailView(generic.DetailView):
+class BookDetailView(LoginRequiredMixin, generic.DetailView):
     model = Book
     template_name = 'catalog/book_details.html'
     context_object_name = 'book_detail_info'
 
-class AuthorListView(generic.ListView):
+class AuthorListView(LoginRequiredMixin, generic.ListView):
     model = Author
     template_name = 'catalog/authors.html'
     context_object_name = 'list_of_all_authors'
     paginate_by = 10
 
-class AuthorDetailView(generic.DetailView):
+class AuthorDetailView(LoginRequiredMixin, generic.DetailView):
     model = Author
     template_name = 'catalog/author_details.html'
     context_object_name = 'author'
