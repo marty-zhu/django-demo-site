@@ -73,6 +73,8 @@ class LoanedBooksByUserListView(LoginRequiredMixin, generic.ListView):
             ).order_by('due_back')
 
 class AllLoanedBooksLibrarianListView(PermissionRequiredMixin, generic.ListView):
+    permission_required = ('catalog.can_mark_returned',)
+
     model = BookInstance
     template_name = 'catalog/bookinstance_on_loan_list_librarian.html'
     paginate_by = 10
