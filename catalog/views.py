@@ -76,7 +76,7 @@ class AllLoanedBooksLibrarianListView(PermissionRequiredMixin, generic.ListView)
     permission_required = ('catalog.can_mark_returned',)
 
     model = BookInstance
-    template_name = 'catalog/bookinstance_on_loan_list_librarian.html'
+    template_name = 'catalog/bookinstance_on_loan_list.html'
     paginate_by = 10
 
     def get_queryset(self):
