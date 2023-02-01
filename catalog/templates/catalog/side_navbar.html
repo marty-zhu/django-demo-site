@@ -11,7 +11,7 @@
     </li>
     {% if perms.catalog.can_mark_returned %}
     <li id="loaned-books" class="user-util">
-        <a href="{% url 'catalog:books-on-loan' %}"></a>
+        <a href="{% url 'catalog:books-on-loan' %}">Books on Loan</a>
     </li>
     {% endif %}
     <li class="user-util"><a href="{% url 'logout' %}?next={{ request.path }}">Logout</a></li>
