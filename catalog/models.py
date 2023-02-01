@@ -126,7 +126,9 @@ class BookInstance(models.Model):
     )
 
     class Meta:
+
         ordering = ['status', 'loaned_on', 'due_back']
+        permissions = (('can_mark_returned', 'Set book as returned'),)
 
     def __str__(self):
         """Human-readable string representation for validation."""
