@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from django.template import loader
 from django.views import generic
 
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 from .models import *
 
@@ -71,6 +71,17 @@ class LoanedBooksByUserListView(LoginRequiredMixin, generic.ListView):
             ).filter(
                 status__exact='o'
             ).order_by('due_back')
+
+class AllLoanedBooksLibrarianListView(PermissionRequiredMixin, generic.ListView):
+    model = BookInstance
+    template_name = 'catalog/bookinstance_on_loan_list_librarian.html'
+    paginate_by = 10
+
+    def get_queryset(self):
+        return BookInstance.objects.filter(
+            status__exact='o'
+        ).order_by('due_back')
+    
 
 def genres(request):
     list_of_all_genres = Genre.objects.all()
