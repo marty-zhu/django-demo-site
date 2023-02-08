@@ -139,12 +139,16 @@ class BookInstance(models.Model):
         """Helper method to update book status."""
         self.status=status
 
-    def loan(self):
+    def loan(self, period=None):
         """
         Automatically sets the loan out, due back, and status information
         when a book is being loaned out.
         """
-        period = timedelta(days=14)
+        if period is None:
+            period = timedelta(days=14)
+        else:
+            period = int(period)
+
         self.loaned_on = timezone.now()
         self.due_back = self.loaned_on + period
         self._update_status(self.STATUS_LOANED)
