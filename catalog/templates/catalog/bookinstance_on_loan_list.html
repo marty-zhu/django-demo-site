@@ -7,15 +7,15 @@
     <table>
         <tr>
             <th>Book Title</th>
-            <th>Due Date</th>
             <th>Borrowed By</th>
+            <th>Due Date</th>
         </tr>
         {% for book_instance in bookinstance_list %}
         <tr class="{% if book_instance.is_overdue %}text-danger{% endif %}">
             <td><a href="{% url 'catalog:book-detail-view' book_instance.book.pk %}">{{ book_instance.book.title }}</a></td>
-            <td>{{ book_instance.due_back }}</td>
             {% comment %} TODO: link to user account page with librarian controls {% endcomment %}
             <td>{{ book_instance.borrower }}</td>
+            <td>{{ book_instance.due_back }}</td>
         </tr>
         {% endfor %}
     </table>
