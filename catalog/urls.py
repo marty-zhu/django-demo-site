@@ -13,4 +13,5 @@ urlpatterns = [
     path('languages/', views.languages, name='languages'),
     path('mybooks/', views.LoanedBooksByUserListView.as_view(), name='my-borrowed'),
     path('booksloaned/', views.AllLoanedBooksLibrarianListView.as_view(), name='books-on-loan'),
+    path('librarian/user/<int:pk>', views.manage_user, name='manage-user'),
 ]
