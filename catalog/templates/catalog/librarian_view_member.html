@@ -1,26 +1,40 @@
 {% extends 'catalog/base_generic.html' %}
 
 {% block content %}
-    <h1>My Borrowed Books</h1>
-    {% if bookinstance_list %}
+    {% if member %}
+    <ul class="member-info">
+        <li class="imp-info">
+            Member: <h1>{{ member.get_full_name }}</h1>
+        </li>
+        <li class="key-info">
+            <p>Username: {{ member.username }}</p>
+        </li>
+    </ul>
+    {% endif %}
+    <br>
+    <hr>
+    <h2>Books on Loan</h2>
+    {% if books_loaned_to_member %}
 
     <table class="book-table">
         <tr class="table-header-row">
             <th>Book Title</th>
             <th>Due By</th>
+            <th>Action</th>
         </tr>
-        {% for book_instance in bookinstance_list %}
+        {% for book_instance in books_loaned_to_member %}
         <tr class="table-content {% if book_instance.is_overdue %}text-danger{% endif %}">
             <td>
                 <a href="{% url 'catalog:book-detail-view' book_instance.book.pk %}">{{ book_instance.book.title }}</a>
             </td>
             <td>{{ book_instance.due_back }}</td>
+            <td>TODO: renew</td>
         </tr>
         {% endfor %}
     </table>
 
     {% else %}
-    <p>You didn't borrow any books yet.</p>
+    <p>There are no books on loan to this member.</p>
     {% endif %}
 
 {% endblock content %}
