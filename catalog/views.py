@@ -84,6 +84,13 @@ class AllLoanedBooksLibrarianListView(PermissionRequiredMixin, generic.ListView)
             status__exact='o'
         ).order_by('due_back')
     
+def manage_member(request, username):
+    member = get_object_or_404(User, username=username)
+    books_loaned = member.bookinstance_set.all()
+    return render(request, 'catalog/librarian_view_member.html', {
+        'member': member,
+        'books_loaned_to_member': books_loaned,
+    })
 
 def genres(request):
     list_of_all_genres = Genre.objects.all()
