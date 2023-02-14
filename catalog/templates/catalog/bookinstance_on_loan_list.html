@@ -14,7 +14,11 @@
         <tr class="table-content {% if book_instance.is_overdue %}text-danger{% endif %}">
             <td><a href="{% url 'catalog:book-detail-view' book_instance.book.pk %}">{{ book_instance.book.title }}</a></td>
             {% comment %} TODO: link to user account page with librarian controls {% endcomment %}
-            <td>{{ book_instance.borrower }}</td>
+            <td>
+                <a href="{% url 'catalog:librarian-manage-member' book_instance.borrower.username %}">
+                    {{ book_instance.borrower }}
+                </a>
+            </td>
             <td>{{ book_instance.due_back }}</td>
         </tr>
         {% endfor %}
