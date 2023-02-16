@@ -123,7 +123,7 @@ def renew_book_librarian(request, pk):
 
     return render(
         request,
-        'catalog/librarian_view_renew_book.html',
+        'catalog/librarian_renew_book.html',
         context,
     )
 
