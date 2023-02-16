@@ -6,6 +6,7 @@ from django.template import loader
 from django.views import generic
 
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.contrib.auth.decorators import login_required, permission_required
 
 from .models import *
 from .forms import RenewBookForm
@@ -87,6 +88,8 @@ class AllLoanedBooksLibrarianListView(PermissionRequiredMixin, generic.ListView)
             status__exact='o'
         ).order_by('due_back')
     
+@login_required
+@permission_required('catalog.can_mark_returned', raise_exception=True)
 def manage_member(request, username):
     member = get_object_or_404(User, username=username)
     books_loaned = member.bookinstance_set.all()
@@ -95,6 +98,8 @@ def manage_member(request, username):
         'books_loaned_to_member': books_loaned,
     })
 
+@login_required
+@permission_required('catalog.can_mark_returned', raise_exception=True)
 def renew_book_librarian(request, pk):
     book_instance = get_object_or_404(BookInstance, pk=pk)
 
