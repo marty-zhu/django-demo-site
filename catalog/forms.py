@@ -11,7 +11,7 @@ EXTENSION_DAYS = [3, 7, 14]
 class RenewBookForm(forms.Form):
     extend_days = forms.DurationField(
         required=True,
-        help_text='Enter 3, 7, or 14 days for an extension from now.',
+        help_text='Select 3, 7, or 14 days for an extension from now.',
         widget=forms.Select(days=EXTENSION_DAYS),
     )
 
