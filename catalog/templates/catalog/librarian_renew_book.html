@@ -1,0 +1,26 @@
+{% extends 'catalog/base_generic.html' %}
+
+{% block content %}
+
+<h1 class="imp-info">RENEW: {{ book_instance.book.title }}</h1>
+<p class="key-info">Copy ID: {{ book_instance.copy_id }}</p>
+
+{% if book_instance.borrower %}
+<p class="key-info">Borrower: {{ book_instance.borrower }}</p>
+<p class="{% if book_instance.is_overdue %}text-danger{% endif %}">
+    Due date: {{ book_instance.due_back }}
+</p>
+
+<form action="" method="post">
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+    </table>
+    <input type="submit" value="Submit">
+</form>
+
+{% else %}
+<h2 class="text-warning">This book is not on loan.</h2>
+{% endif %}
+
+{% endblock content %}
