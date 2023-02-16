@@ -1,4 +1,6 @@
-from django.http import HttpResponse
+from datetime import datetime, timezone
+
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.template import loader
 from django.views import generic
@@ -6,6 +8,7 @@ from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 from .models import *
+from .forms import RenewBookForm
 
 # Create your views here.
 # TODO: refactor to generic views to reduce redundancy
@@ -91,6 +94,38 @@ def manage_member(request, username):
         'member': member,
         'books_loaned_to_member': books_loaned,
     })
+
+def renew_book_librarian(request, pk):
+    book_instance = get_object_or_404(BookInstance, pk=pk)
+
+    if request.method == 'POST':
+        form = RenewBookForm(request.POST)
+        
+        if form.is_valid():
+            extend_days = form.cleaned_data['extend_days']
+            utcnow = datetime.now(timezone.utc)
+            extend_to_date = utcnow + extend_days
+            book_instance.due_back = extend_to_date
+            book_instance.save()
+
+            return HttpResponseRedirect(reverse('books-on-loan'))
+
+    else:
+        # TODO complete function
+        form = RenewBookForm(initial={
+            'extend_days': datetime.timedelta(days=3)
+        })
+
+    context = {
+        'form': form,
+        'book_instance': book_instance,
+    }
+
+    return render(
+        request,
+        'catalog/librarian_view_renew_book.html',
+        context,
+    )
 
 def genres(request):
     list_of_all_genres = Genre.objects.all()
