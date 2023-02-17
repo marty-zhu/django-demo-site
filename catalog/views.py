@@ -1,4 +1,4 @@
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
@@ -100,8 +100,8 @@ def manage_member(request, username):
 
 @login_required
 @permission_required('catalog.can_mark_returned', raise_exception=True)
-def renew_book_librarian(request, pk):
-    book_instance = get_object_or_404(BookInstance, pk=pk)
+def renew_book_librarian(request, copy_id):
+    book_instance = get_object_or_404(BookInstance, pk=copy_id)
 
     if request.method == 'POST':
         form = RenewBookForm(request.POST)
@@ -118,7 +118,7 @@ def renew_book_librarian(request, pk):
     else:
         # TODO complete function
         form = RenewBookForm(initial={
-            'extend_days': datetime.timedelta(days=3)
+            'extend_days': timedelta(days=3)
         })
 
     context = {
