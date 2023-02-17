@@ -12,6 +12,7 @@
 </p>
 
 <form action="" method="post">
+    {% comment %} the `action` attrs was left empty to post back to the current URL {% endcomment %}
     {% csrf_token %}
     <table>
         {{ form.as_table }}
