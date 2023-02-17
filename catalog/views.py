@@ -113,7 +113,7 @@ def renew_book_librarian(request, copy_id):
             book_instance.due_back = extend_to_date
             book_instance.save()
 
-            return HttpResponseRedirect(reverse('books-on-loan'))
+            return HttpResponseRedirect(reverse('catalog:books-on-loan'))
 
     else:
         # TODO complete function
