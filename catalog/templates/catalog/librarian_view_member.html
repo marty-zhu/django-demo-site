@@ -28,7 +28,9 @@
                 <a href="{% url 'catalog:book-detail-view' book_instance.book.pk %}">{{ book_instance.book.title }}</a>
             </td>
             <td>{{ book_instance.due_back }}</td>
-            <td>TODO: renew</td>
+            <td>
+                <a href="{% url 'catalog:librarian-renew-book' book_instance.copy_id %}">Renew</a>
+            </td>
         </tr>
         {% endfor %}
     </table>
