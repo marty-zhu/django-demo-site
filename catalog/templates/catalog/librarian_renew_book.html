@@ -15,7 +15,7 @@
     {% comment %} the `action` attrs was left empty to post back to the current URL {% endcomment %}
     {% csrf_token %}
     <table>
-        {{ form.as_table }}
+        {{ form.as_div }}
     </table>
     <input type="submit" value="Extend">
 </form>
