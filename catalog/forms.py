@@ -10,7 +10,7 @@ EXTENSION_DAYS = [(timedelta(days=days), f"{days} days from now") for days in (3
 class RenewBookForm(forms.Form):
     extend_days = forms.DurationField(
         required=True,
-        help_text='Select 3, 7, or 14 days for an extension from now.',
+        help_text=gtl('Select 3, 7, or 14 days for an extension from now.'),
         widget=forms.Select(choices=EXTENSION_DAYS),
     )
 
