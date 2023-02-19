@@ -29,7 +29,11 @@
             </td>
             <td>{{ book_instance.due_back }}</td>
             <td>
+                {% if perms.catalog.can_mark_returned %}
                 <a href="{% url 'catalog:librarian-renew-book' book_instance.copy_id %}">Renew</a>
+                {% else %}
+                Ask a question
+                {% endif %}
             </td>
         </tr>
         {% endfor %}
