@@ -81,7 +81,7 @@ class AllLoanedBooksLibrarianListView(PermissionRequiredMixin, generic.ListView)
 
     model = BookInstance
     template_name = 'catalog/bookinstance_on_loan_list.html'
-    paginate_by = 10
+    paginate_by = 20
 
     def get_queryset(self):
         return BookInstance.objects.filter(
