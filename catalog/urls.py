@@ -11,8 +11,10 @@ urlpatterns = [
     path('authors/<int:pk>', views.AuthorDetailView.as_view(), name='author-detail-view'),
     path('genres/', views.genres, name='genres'),
     path('languages/', views.languages, name='languages'),
-    path('mybooks/', views.LoanedBooksByUserListView.as_view(), name='my-borrowed'),
+    path('mybooks/', views.LoanedBooksByUserListView.as_view(), name='my-borrowed'),  # TODO: change to `member/mybooks`.
     path('librarian/booksloaned/', views.AllLoanedBooksLibrarianListView.as_view(), name='books-on-loan'),
     path('librarian/user/<str:username>', views.manage_member, name='librarian-manage-member'),
     path('librarian/book/<uuid:copy_id>/renew/', views.renew_book_librarian, name='librarian-renew-book'),
+    # path('librarian/user/add', ) # TODO: add librarian add user function
+    # path('librarian/books/add', ) # TODO: add librarian add book
 ]

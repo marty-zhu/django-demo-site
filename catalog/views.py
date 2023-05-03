@@ -101,6 +101,8 @@ def manage_member(request, username):
 @login_required
 @permission_required('catalog.can_mark_returned', raise_exception=True)
 def renew_book_librarian(request, copy_id):
+    """Receive the request and behave according to GET or POST request."""
+
     book_instance = get_object_or_404(BookInstance, pk=copy_id)
 
     if request.method == 'POST':
@@ -116,7 +118,6 @@ def renew_book_librarian(request, copy_id):
             return HttpResponseRedirect(reverse('catalog:books-on-loan'))
 
     else:
-        # TODO complete function
         form = RenewBookForm(initial={
             'extend_days': timedelta(days=3)
         })

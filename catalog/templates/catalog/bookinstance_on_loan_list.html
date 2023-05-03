@@ -12,7 +12,9 @@
         </tr>
         {% for book_instance in bookinstance_list %}
         <tr class="table-content {% if book_instance.is_overdue %}text-danger{% endif %}">
-            <td><a href="{% url 'catalog:librarian-renew-book' book_instance.copy_id %}">{{ book_instance.book.title }}</a></td>
+            <td>
+                <a href="{% url 'catalog:librarian-renew-book' book_instance.copy_id %}">{{ book_instance.book.title }}</a>
+            </td>
             {% comment %} TODO: link to user account page with librarian controls {% endcomment %}
             <td>
                 <a href="{% url 'catalog:librarian-manage-member' book_instance.borrower.username %}">
