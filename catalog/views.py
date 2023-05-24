@@ -162,4 +162,8 @@ def librarian_add_user(request):
         context = {
             'user_form': form
         }
-        return render(request, 'librarian_add_user.html', context)
+        return render(
+            request,
+            'librarian_add_user.html',
+            context
+        )
