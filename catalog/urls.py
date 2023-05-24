@@ -15,6 +15,6 @@ urlpatterns = [
     path('librarian/booksloaned/', views.AllLoanedBooksLibrarianListView.as_view(), name='books-on-loan'),
     path('librarian/user/<str:username>', views.manage_member, name='librarian-manage-member'),
     path('librarian/book/<uuid:copy_id>/renew/', views.renew_book_librarian, name='librarian-renew-book'),
-    # path('librarian/user/add', ) # TODO: add librarian add user function
+    path('librarian/user/add', views.librarian_add_user, name='librarian-add-user'),
     # path('librarian/books/add', ) # TODO: add librarian add book
 ]
