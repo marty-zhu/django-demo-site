@@ -7,6 +7,7 @@ from django.views import generic
 
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.forms import UserCreationForm  #TODO: add create user view
 
 from .models import *
 from .forms import RenewBookForm
@@ -148,3 +149,17 @@ def languages(request):
         'list_of_all_languages': list_of_all_languages,
     }
     return HttpResponse(template.render(context, request))
+
+@login_required
+@permission_required('catalog.can_mark_returned', raise_exception=True)
+def librarian_add_user(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+    else:
+        form = UserCreationForm()
+        context = {
+            'user_form': form
+        }
+        return render(request, 'librarian_add_user.html', context)
