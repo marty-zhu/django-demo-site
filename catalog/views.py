@@ -164,6 +164,6 @@ def librarian_add_user(request):
         }
         return render(
             request,
-            'librarian_add_user.html',
-            context
+            'catalog/librarian_add_user.html',
+            context,
         )
