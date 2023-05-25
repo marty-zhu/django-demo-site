@@ -13,6 +13,9 @@
     <li id="loaned-books" class="user-util">
         <a href="{% url 'catalog:books-on-loan' %}">Books on Loan</a>
     </li>
+    <li id="add-user" class="user-util">
+        <a href="{% url 'catalog:librarian-add-user' %}">Add a User</a>
+    </li>
     {% endif %}
     <li class="user-util"><a href="{% url 'logout' %}?next={{ request.path }}">Logout</a></li>
     {% else %}
