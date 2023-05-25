@@ -1,0 +1,19 @@
+{% extends 'catalog/base_generic.html' %}
+
+{% block content %}
+<h1>Add a new user</h1>
+{% if user_form %}
+<form action="" method="post">
+    {% comment %} the `action` attrs was left empty to post back to the current URL {% endcomment %}
+    {% csrf_token %}
+    <table>
+        {{ user_form.as_div }}
+    </table>
+    <input type="submit" value="Register">
+</form>
+
+{% else %}
+<h2 class="text-warning">Cannot create user at this moment.</h2>
+{% endif %}
+
+{% endblock content %}
