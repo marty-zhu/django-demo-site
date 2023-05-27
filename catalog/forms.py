@@ -1,6 +1,8 @@
 from datetime import datetime, timedelta
 
 from django import forms
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as gtl  # this is for future translation needs
@@ -25,3 +27,19 @@ class RenewBookForm(forms.Form):
             raise ValidationError(gtl('Please select the amount of days to extend.'))
 
         return data
+
+class UserRegistrationForm(UserCreationForm):
+    first_name = forms.CharField(max_length=101, required=True)
+    last_name = forms.CharField(max_length=101, required=True)
+    email = forms.EmailField(required=True)
+
+    class Meta:
+        model = User
+        fields = [
+            'username',
+            'first_name',
+            'last_name',
+            'email',
+            'password1',
+            'password2',
+        ]
