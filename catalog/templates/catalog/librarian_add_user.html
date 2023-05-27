@@ -7,7 +7,7 @@
     {% comment %} the `action` attrs was left empty to post back to the current URL {% endcomment %}
     {% csrf_token %}
     <table>
-        {{ user_form.as_div }}
+        {{ user_form.as_ul }}
     </table>
     <input type="submit" value="Register">
 </form>
