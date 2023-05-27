@@ -157,6 +157,7 @@ def librarian_add_user(request):
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
             form.save()
+            return HttpResponseRedirect(reverse('catalog:index'))
     else:
         form = UserRegistrationForm()
         context = {
