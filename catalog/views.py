@@ -5,6 +5,8 @@ from django.shortcuts import render, get_object_or_404
 from django.template import loader
 from django.views import generic
 
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.auth.decorators import login_required, permission_required
 # from django.contrib.auth.forms import UserCreationForm
@@ -156,15 +158,19 @@ def librarian_add_user(request):
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(reverse('catalog:index'))
+            user = form.save()
+            messages.success(request, ("User added successfully."))
+            return HttpResponseRedirect(reverse('catalog:librarian-manage-member', kwargs={'username': user.username}))
+        # else:
+        #     return HttpResponseRedirect(reverse('catalog:librarian-add-user'))
     else:
         form = UserRegistrationForm()
-        context = {
-            'user_form': form,
-        }
-        return render(
-            request,
-            'catalog/librarian_add_user.html',
-            context,
-        )
+
+    context = {
+        'user_form': form,
+    }
+    return render(
+        request,
+        'catalog/librarian_add_user.html',
+        context,
+    )
