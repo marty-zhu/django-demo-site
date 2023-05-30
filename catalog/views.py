@@ -161,8 +161,6 @@ def librarian_add_user(request):
             user = form.save()
             messages.success(request, ("User added successfully."))
             return HttpResponseRedirect(reverse('catalog:librarian-manage-member', kwargs={'username': user.username}))
-        # else:
-        #     return HttpResponseRedirect(reverse('catalog:librarian-add-user'))
     else:
         form = UserRegistrationForm()
 
