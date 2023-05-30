@@ -2,20 +2,15 @@
 
 {% block content %}
 {% if perms.catalog.can_mark_returned %}
+
     <h1>Add a new user</h1>
-    {% if user_form %}
     <form action="" method="post">
         {% comment %} the `action` attrs was left empty to post back to the current URL {% endcomment %}
         {% csrf_token %}
-        <table>
-            {{ user_form.as_ul }}
-        </table>
+        {{ user_form.as_p }}
         <input type="submit" value="Register">
     </form>
 
-    {% else %}
-    <h2 class="text-warning">Cannot add user at this time.</h2>
-    {% endif %}
 {% endif %}
 
 {% endblock content %}
