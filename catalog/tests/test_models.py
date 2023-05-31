@@ -100,13 +100,19 @@ class TestBookModel(TestCase):
         )
 
     def test_title_label(self):
-        pass
+        book = Book.objects.get(isbn=123456789)
+        field_label = book._meta.get_field('title').verbose_name
+        self.assertEqual(field_label, 'title')
 
     def test_title_max_length(self):
-        pass
+        book = Book.objects.get(isbn=123456789)
+        max_len = book._meta.get_field('title').max_length
+        self.assertEqual(max_len, 200)
 
     def test_title_help_text(self):
-        pass
+        book = Book.objects.get(isbn=123456789)
+        help_text = book._meta.get_field('title').help_text
+        self.assertEqual(help_text, 'The title of the book')
 
     def test_pub_date_label(self):
         pass
