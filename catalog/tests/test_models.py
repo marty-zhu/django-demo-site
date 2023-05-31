@@ -115,10 +115,14 @@ class TestBookModel(TestCase):
         self.assertEqual(help_text, 'The title of the book')
 
     def test_pub_date_label(self):
-        pass
+        book = Book.objects.get(isbn=123456789)
+        field_label = book._meta.get_field('pue_date').verbose_name
+        self.assertEqual(field_label, 'pub date')
 
     def test_pub_date_help_text(self):
-        pass
+        book = Book.objects.get(isbn=123456789)
+        field_label = book._meta.get_field('pue_date').help_text
+        self.assertEqual(field_label, 'The publication date')
 
     def test_author_label(self):
         pass
