@@ -99,4 +99,50 @@ class TestBookModel(TestCase):
             language = Language(name='Python'),
         )
 
-    
+    def test_title_label(self):
+        pass
+
+    def test_title_max_length(self):
+        pass
+
+    def test_title_help_text(self):
+        pass
+
+    def test_pub_date_label(self):
+        pass
+
+    def test_pub_date_help_text(self):
+        pass
+
+    def test_author_label(self):
+        pass
+
+    def test_author_help_text(self):
+        pass
+
+    def test_summary_label(self):
+        pass
+
+    def test_summary_max_length(self):
+        pass
+
+    def test_summary_help_text(self):
+        pass
+
+    def test_isbn_label(self):
+        pass
+
+    def test_isbn_help_text(self):
+        pass
+
+    def test_genre_label(self):
+        pass
+
+    def test_genre_help_text(self):
+        pass
+
+    def test_genre_related_name(self):
+        pass
+
+    def test_language_label(self):
+        pass
