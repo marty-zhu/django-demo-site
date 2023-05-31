@@ -180,4 +180,6 @@ class TestBookModel(TestCase):
         self.assertEqual(help_text, 'The genre(s) for this book')
 
     def test_language_label(self):
-        pass
+        book = Book.objects.get(isbn=123456789)
+        field_label = book._meta.get_field('language').verbose_name
+        self.assertEqual(field_label, 'Language')
