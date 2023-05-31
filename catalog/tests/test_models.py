@@ -155,10 +155,14 @@ class TestBookModel(TestCase):
         self.assertEqual(help_text, 'A summary of the book\'s content')
 
     def test_isbn_label(self):
-        pass
+        book = Book.objects.get(isbn=123456789)
+        field_label = book._meta.get_field('isbn').verbose_name
+        self.assertEqual(field_label, 'ISBN')
 
     def test_isbn_help_text(self):
-        pass
+        book = Book.objects.get(isbn=123456789)
+        help_text = book._meta.get_field('isbn').help_text
+        self.assertEqual(help_text, 'The ISBN number of the book')
 
     def test_genre_label(self):
         pass
