@@ -87,17 +87,23 @@ class TestBookModel(TestCase):
 
     @classmethod
     def setUpTestData(cls):
+        # author = Author.objects.create(
+        #     first_name = "Test",
+        #     last_name = "Author",
+        # )
+        # genre = Genre.objects.create(
+        #     name = "Test",
+        # )
+        # lang = Language.objects.create(
+        #     name = "Test",
+        # )
         Book.objects.create(
             title = "Test Book",
             pub_date = date(year=1900, month=1, day=1),
-            authors = Author.objects.create(
-                first_name="Test", last_name="Case",
-            ),
             summary = "Test case for Book object",
             isbn = 123456789,
-            genre = Genre(name='Testing'),
-            language = Language(name='Python'),
         )
+
 
     def test_title_label(self):
         book = Book.objects.get(isbn=123456789)
