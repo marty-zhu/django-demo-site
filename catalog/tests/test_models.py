@@ -148,7 +148,7 @@ class TestBookModel(TestCase):
 
     def test_author_related_name(self):
         book = Book.objects.get(isbn=123456789)
-        related_name = book._meta.get_field('authors').related_name
+        related_name = book._meta.get_field('authors')._related_name
         self.assertEqual(related_name, 'books')
 
     def test_summary_label(self):
@@ -183,7 +183,7 @@ class TestBookModel(TestCase):
 
     def test_genre_related_name(self):
         book = Book.objects.get(isbn=123456789)
-        related_name = book._meta.get_field('genre').related_name
+        related_name = book._meta.get_field('genre')._related_name
         self.assertEqual(related_name, 'books')
 
     def test_genre_help_text(self):
