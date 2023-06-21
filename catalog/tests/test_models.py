@@ -133,13 +133,13 @@ class TestBookModel(TestCase):
 
     def test_pub_date_help_text(self):
         book = Book.objects.get(isbn=123456789)
-        help_text = book._meta.get_field('pue_date').help_text
+        help_text = book._meta.get_field('pub_date').help_text
         self.assertEqual(help_text, 'The publication date')
 
     def test_author_label(self):
         book = Book.objects.get(isbn=123456789)
         field_label = book._meta.get_field('authors').verbose_name
-        self.assertEqual(field_label, 'author')
+        self.assertEqual(field_label, 'authors')
 
     def test_author_help_text(self):
         book = Book.objects.get(isbn=123456789)
