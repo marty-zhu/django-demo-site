@@ -110,6 +110,7 @@ class TestBookModel(TestCase):
         book.authors.add(author)
         book.genre.add(genre)
         book.language = lang
+        book.save()
 
     def test_title_label(self):
         book = Book.objects.get(isbn=123456789)
@@ -203,3 +204,8 @@ class TestBookModel(TestCase):
     def test_book_has_genre(self):
         book = Book.objects.get(isbn=123456789)
         self.assertEqual(book.genre.count(), 1)
+
+    def test_book_has_language(self):
+        book = Book.objects.get(isbn=123456789)
+        lang = Language.objects.get(id=1)
+        self.assertEqual(book.language, lang)
