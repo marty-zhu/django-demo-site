@@ -87,23 +87,29 @@ class TestBookModel(TestCase):
 
     @classmethod
     def setUpTestData(cls):
-        # author = Author.objects.create(
-        #     first_name = "Test",
-        #     last_name = "Author",
-        # )
-        # genre = Genre.objects.create(
-        #     name = "Test",
-        # )
-        # lang = Language.objects.create(
-        #     name = "Test",
-        # )
+        Author.objects.create(
+            first_name = "Test",
+            last_name = "Author",
+        )
+        Genre.objects.create(
+            name = "Test",
+        )
+        Language.objects.create(
+            name = "Test",
+        )
         Book.objects.create(
             title = "Test Book",
             pub_date = date(year=1900, month=1, day=1),
             summary = "Test case for Book object",
             isbn = 123456789,
         )
-
+        book = Book.objects.get(isbn=123456789)
+        author = Author.objects.get(id=1)
+        genre = Genre.objects.get(id=1)
+        lang = Language.objects.get(id=1)
+        book.authors.add(author)
+        book.genre.add(genre)
+        book.language = lang
 
     def test_title_label(self):
         book = Book.objects.get(isbn=123456789)
@@ -122,7 +128,7 @@ class TestBookModel(TestCase):
 
     def test_pub_date_label(self):
         book = Book.objects.get(isbn=123456789)
-        field_label = book._meta.get_field('pue_date').verbose_name
+        field_label = book._meta.get_field('pub_date').verbose_name
         self.assertEqual(field_label, 'pub date')
 
     def test_pub_date_help_text(self):
@@ -133,7 +139,7 @@ class TestBookModel(TestCase):
     def test_author_label(self):
         book = Book.objects.get(isbn=123456789)
         field_label = book._meta.get_field('authors').verbose_name
-        self.assertEqual(field_label, 'Author')
+        self.assertEqual(field_label, 'author')
 
     def test_author_help_text(self):
         book = Book.objects.get(isbn=123456789)
@@ -173,7 +179,7 @@ class TestBookModel(TestCase):
     def test_genre_label(self):
         book = Book.objects.get(isbn=123456789)
         field_label = book._meta.get_field('genre').verbose_name
-        self.assertEqual(field_label, 'Genre')
+        self.assertEqual(field_label, 'genre')
 
     def test_genre_related_name(self):
         book = Book.objects.get(isbn=123456789)
@@ -188,4 +194,4 @@ class TestBookModel(TestCase):
     def test_language_label(self):
         book = Book.objects.get(isbn=123456789)
         field_label = book._meta.get_field('language').verbose_name
-        self.assertEqual(field_label, 'Language')
+        self.assertEqual(field_label, 'language')
