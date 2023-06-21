@@ -195,3 +195,11 @@ class TestBookModel(TestCase):
         book = Book.objects.get(isbn=123456789)
         field_label = book._meta.get_field('language').verbose_name
         self.assertEqual(field_label, 'language')
+
+    def test_book_has_author(self):
+        book = Book.objects.get(isbn=123456789)
+        self.assertEqual(book.authors.count(), 1)
+
+    def test_book_has_genre(self):
+        book = Book.objects.get(isbn=123456789)
+        self.assertEqual(book.genre.count(), 1)
