@@ -215,7 +215,20 @@ class TestBookInstanceModel(TestCase):
 
     @classmethod
     def setUpTestData(cls):
-        pass
+        cls.book = Book.objects.create(
+            title = 'Test Book',
+            pub_date = date(year=1900, month=1, day=1),
+            summary = "Test case for Book object",
+            isbn = 123456789,
+        )
+        cls.borrower = User.objects.create(
+            username = 'testuser',
+        )
+        cls.book_instance = BookInstance.objects.create(
+            book = cls.book,
+            borrower = cls.borrower,
+        )
+        cls.book_instance.save()
 
     def test_book_instance_labels(self):
         pass
