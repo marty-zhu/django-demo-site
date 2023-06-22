@@ -261,7 +261,10 @@ class TestBookInstanceModel(TestCase):
         )
 
     def test_book_instance_string(self):
-        pass
+        # TODO: how to mock the string tracing from Book to Author objects
+        expected_string = f"{self.book_instance.book} with ID ending with ..\
+            {self.book_instance.copy_id[-6:]}"
+        self.assertEqual(str(self.book_instance), expected_string)
 
     def test_book_instance_update_status(self):
         pass
