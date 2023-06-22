@@ -209,3 +209,29 @@ class TestBookModel(TestCase):
         book = Book.objects.get(isbn=123456789)
         lang = Language.objects.get(id=1)
         self.assertEqual(book.language, lang)
+
+
+class TestBookInstanceModel(TestCase):
+
+    @classmethod
+    def setUpTestData(cls):
+        pass
+
+    def test_book_instance_labels(self):
+        pass
+
+    def test_book_instance_string(self):
+        pass
+
+    def test_book_instance_update_status(self):
+        pass
+
+    def test_book_instance_loan_method(self):
+        pass
+
+    def test_book_instance_is_overdue_true(self):
+        pass
+    
+    def test_book_instance_is_overdue_false(self):
+        pass
+    
