@@ -231,7 +231,34 @@ class TestBookInstanceModel(TestCase):
         cls.book_instance.save()
 
     def test_book_instance_labels(self):
-        pass
+        self.assertEqual(
+            self.book_instance._meta.get_field('copy_id').name,
+            'copy_id'
+        )
+        self.assertEqual(
+            self.book_instance._meta.get_field('loaned_on').name,
+            'loaned_on'
+        )
+        self.assertEqual(
+            self.book_instance._meta.get_field('due_back').name,
+            'due_back'
+        )
+        self.assertEqual(
+            self.book_instance._meta.get_field('book').name,
+            'book'
+        )
+        self.assertEqual(
+            self.book_instance._meta.get_field('imprint').name,
+            'imprint'
+        )
+        self.assertEqual(
+            self.book_instance._meta.get_field('borrower').name,
+            'borrower'
+        )
+        self.assertEqual(
+            self.book_instance._meta.get_field('status').name,
+            'status'
+        )
 
     def test_book_instance_string(self):
         pass
