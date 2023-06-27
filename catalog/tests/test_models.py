@@ -272,7 +272,10 @@ class TestBookInstanceModel(TestCase):
         self.assertEqual(str(self.book_instance), expected_string)
 
     def test_book_instance_update_status(self):
-        pass
+        self.book_instance._update_status(
+            self.book_instance.STATUS_AVAILABLE)
+        self.assertEqual(
+            self.book_instance.status, self.book_instance.STATUS_AVAILABLE)
 
     def test_book_instance_loan_method(self):
         pass
