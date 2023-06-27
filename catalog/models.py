@@ -143,11 +143,14 @@ class BookInstance(models.Model):
         """
         Automatically sets the loan out, due back, and status information
         when a book is being loaned out.
+
+        Arguments:
+            period [int]: the number of days to loan out.
         """
         if period is None:
             period = timedelta(days=14)
         else:
-            period = int(period)
+            period = timedelta(int(period))
 
         self.loaned_on = timezone.now()
         self.due_back = self.loaned_on + period
