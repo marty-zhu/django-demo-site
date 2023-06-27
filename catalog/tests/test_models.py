@@ -1,6 +1,9 @@
 from django.test import TestCase
 from catalog.models import *
 
+from freezegun import freeze_time
+from datetime import date, timedelta
+from django.utils import timezone
 
 class TestAuthorModel(TestCase):
 
@@ -277,8 +280,19 @@ class TestBookInstanceModel(TestCase):
         self.assertEqual(
             self.book_instance.status, self.book_instance.STATUS_AVAILABLE)
 
-    def test_book_instance_loan_method(self):
-        pass
+    @freeze_time("2023-01-01")
+    def test_book_instance_default_loan_method(self):
+        self.book_instance.loan()
+        self.assertEqual(
+            self.book_instance.loaned_on, timezone.now()
+        )
+        self.assertEqual(
+            self.book_instance.due_back, timezone.now() + \
+                timedelta(days=14)
+        )
+        self.assertEqual(
+            self.book_instance.status, self.book_instance.STATUS_LOANED
+        )
 
     def test_book_instance_is_overdue_true(self):
         pass
