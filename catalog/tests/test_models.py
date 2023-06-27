@@ -215,12 +215,18 @@ class TestBookInstanceModel(TestCase):
 
     @classmethod
     def setUpTestData(cls):
+        cls.author = Author.objects.create(
+            first_name = 'Test',
+            last_name = 'Author',
+        )
         cls.book = Book.objects.create(
             title = 'Test Book',
             pub_date = date(year=1900, month=1, day=1),
             summary = "Test case for Book object",
             isbn = 123456789,
         )
+        cls.book.authors.add(cls.author)
+        cls.book.save()
         cls.borrower = User.objects.create(
             username = 'testuser',
         )
