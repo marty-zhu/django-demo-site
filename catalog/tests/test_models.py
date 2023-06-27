@@ -294,6 +294,20 @@ class TestBookInstanceModel(TestCase):
             self.book_instance.status, self.book_instance.STATUS_LOANED
         )
 
+    @freeze_time("2023-01-01")
+    def test_book_instance_custom_loan_time(self):
+        self.book_instance.loan(period=7)
+        self.assertEqual(
+            self.book_instance.loaned_on, timezone.now()
+        )
+        self.assertEqual(
+            self.book_instance.due_back, timezone.now() + \
+                timedelta(days=7)
+        )
+        self.assertEqual(
+            self.book_instance.status, self.book_instance.STATUS_LOANED
+        )
+
     def test_book_instance_is_overdue_true(self):
         pass
     
