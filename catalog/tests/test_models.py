@@ -309,8 +309,11 @@ class TestBookInstanceModel(TestCase):
         )
 
     def test_book_instance_is_overdue_true(self):
-        pass
+        with freeze_time("2023-01-01"):
+            self.book_instance.loan()
+        self.assertTrue(self.book_instance.is_overdue)
     
     def test_book_instance_is_overdue_false(self):
-        pass
+        self.book_instance.loan()
+        self.assertFalse(self.book_instance.is_overdue)
     
