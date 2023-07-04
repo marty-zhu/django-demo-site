@@ -35,5 +35,26 @@ class TestRenewBookForm(TestCase):
 
 class TestUserRegistrationForm(TestCase):
 
-    def test_form_labels(self):
-        pass
+    def test_form_first_name_field_label_and_length(self):
+        form = UserRegistrationForm()
+        self.assertTrue(
+            form.fields['first_name'].label in ['first_name', None]
+        )
+        self.assertEqual(
+            form.fields['first_name'].max_length, 101
+        )
+
+    def test_form_first_name_field_label_and_length(self):
+        form = UserRegistrationForm()
+        self.assertTrue(
+            form.fields['last_name'].label in ['last_name', None]
+        )
+        self.assertEqual(
+            form.fields['last_name'].max_length, 101
+        )
+
+    def test_form_email_field_label(self):
+        form = UserRegistrationForm()
+        self.assertTrue(
+            form.fields['email'].label in ['email', None]
+        )
