@@ -1,3 +1,7 @@
+import pytest
+
+from datetime import timedelta
+
 from django.test import TestCase
 from catalog.forms import *
 
@@ -18,7 +22,12 @@ class TestRenewBookForm(TestCase):
         )
 
     def test_valid_extension_days(self):
-        pass
+        for days in (3, 7, 14):
+            form = RenewBookForm(data={'extend_days': timedelta(days=days)})
+            self.assertTrue(form.is_valid())
 
     def test_invalid_extension_days(self):
-        pass
+        invalid_days = set(i for i in range(1, 15)) - set([3, 7, 14])
+        for days in invalid_days:
+            form = RenewBookForm(data={'extend_days': timedelta(days=days)})
+            self.assertFalse(form.is_valid())
