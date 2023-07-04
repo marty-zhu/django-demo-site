@@ -16,3 +16,9 @@ class TestRenewBookForm(TestCase):
             form.fields['extend_days'].help_text,
             'Select 3, 7, or 14 days for an extension from now.'
         )
+
+    def test_valid_extension_days(self):
+        pass
+
+    def test_invalid_extension_days(self):
+        pass
