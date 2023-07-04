@@ -27,7 +27,7 @@ class TestRenewBookForm(TestCase):
             self.assertTrue(form.is_valid())
 
     def test_invalid_extension_days(self):
-        invalid_days = set(i for i in range(1, 15)) - set([3, 7, 14])
+        invalid_days = set(i for i in range(1, 16)) - set([3, 7, 14])
         for days in invalid_days:
             form = RenewBookForm(data={'extend_days': timedelta(days=days)})
             self.assertFalse(form.is_valid())
