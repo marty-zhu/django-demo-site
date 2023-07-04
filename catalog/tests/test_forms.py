@@ -31,3 +31,9 @@ class TestRenewBookForm(TestCase):
         for days in invalid_days:
             form = RenewBookForm(data={'extend_days': timedelta(days=days)})
             self.assertFalse(form.is_valid())
+
+
+class TestUserRegistrationForm(TestCase):
+
+    def test_form_labels(self):
+        pass
