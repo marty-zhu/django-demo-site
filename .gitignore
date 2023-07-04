@@ -4,3 +4,5 @@
 fabrication_utils
 pytest.ini
 db.sqlite3
+.coverage
+htmlcov
