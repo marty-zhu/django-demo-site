@@ -320,6 +320,12 @@ class TestBookInstanceModel(TestCase):
 
 class TestGenreModel(TestCase):
 
+    @classmethod
+    def setUpTestData(cls):
+        Genre.objects.create(
+            name = 'Test Genre'
+        )
+
     def test_model_labels(self):
         pass
 
