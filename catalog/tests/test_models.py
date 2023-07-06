@@ -342,4 +342,6 @@ class TestGenreModel(TestCase):
         self.assertEqual(help_text, 'Enter a book genre')
 
     def test_model_string(self):
-        pass
+        genre = Genre.objects.get(id=1)
+        string = str(genre)
+        self.assertEqual(string, 'Test Genre')
