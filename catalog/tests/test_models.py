@@ -331,5 +331,10 @@ class TestGenreModel(TestCase):
         field_name = genre._meta.get_field('name').verbose_name
         self.assertEqual(field_name, 'name')
 
+    def test_model_name_max_length(self):
+        genre = Genre.objects.get(id=1)
+        length = genre._meta.get_field('name').max_length
+        self.assertEqual(length, 200)
+
     def test_model_string(self):
         pass
