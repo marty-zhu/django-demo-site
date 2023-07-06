@@ -345,3 +345,6 @@ class TestGenreModel(TestCase):
         genre = Genre.objects.get(id=1)
         string = str(genre)
         self.assertEqual(string, 'Test Genre')
+
+
+# TODO: create tests for model "Language"
