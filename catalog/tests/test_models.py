@@ -336,5 +336,10 @@ class TestGenreModel(TestCase):
         length = genre._meta.get_field('name').max_length
         self.assertEqual(length, 200)
 
+    def test_name_field_help_text(self):
+        genre = Genre.objects.get(id=1)
+        help_text = genre._meta.get_field('name').help_text
+        self.assertEqual(help_text, 'Enter a book genre')
+
     def test_model_string(self):
         pass
