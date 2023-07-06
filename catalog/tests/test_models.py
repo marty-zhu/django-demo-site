@@ -317,3 +317,11 @@ class TestBookInstanceModel(TestCase):
         self.book_instance.loan()
         self.assertFalse(self.book_instance.is_overdue)
     
+
+class TestGenreModel(TestCase):
+
+    def test_model_labels(self):
+        pass
+
+    def test_model_string(self):
+        pass
