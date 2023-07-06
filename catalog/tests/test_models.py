@@ -327,7 +327,9 @@ class TestGenreModel(TestCase):
         )
 
     def test_model_labels(self):
-        pass
+        genre = Genre.objects.get(id=1)
+        field_name = genre._meta.get_field('name').verbose_name
+        self.assertEqual(field_name, 'name')
 
     def test_model_string(self):
         pass
