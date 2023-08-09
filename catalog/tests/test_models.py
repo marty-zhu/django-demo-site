@@ -351,7 +351,9 @@ class TestLanguageModel(TestCase):
 
     @classmethod
     def setUpTestData(cls):
-        pass
+        Language.objects.create(
+            name = 'Test Language'
+        )
 
     def test_model_label(self):
         pass
