@@ -366,4 +366,6 @@ class TestLanguageModel(TestCase):
         self.assertEqual(length, 30)
 
     def test_model_string_text(self):
-        pass
+        lang = Language.objects.get(id=1)
+        string = str(lang)
+        self.assertEqual(string, 'Test Language')
