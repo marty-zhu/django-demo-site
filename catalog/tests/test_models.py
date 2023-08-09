@@ -347,4 +347,17 @@ class TestGenreModel(TestCase):
         self.assertEqual(string, 'Test Genre')
 
 
-# TODO: create tests for model "Language"
+class TestLanguageModel(TestCase):
+
+    @classmethod
+    def setUpTestData(cls):
+        pass
+
+    def test_model_label(self):
+        pass
+
+    def test_model_max_length(self):
+        pass
+
+    def test_model_string_text(self):
+        pass
