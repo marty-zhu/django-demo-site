@@ -356,7 +356,9 @@ class TestLanguageModel(TestCase):
         )
 
     def test_model_label(self):
-        pass
+        lang = Language.objects.get(id=1)
+        field_name = lang._meta.get_field('name').verbose_name
+        self.assertEqual(field_name, 'name')
 
     def test_model_max_length(self):
         pass
