@@ -25,13 +25,16 @@ class TestRenewBookForm(TestCase):
     def test_valid_extension_days(self):
         for days in (3, 7, 14):
             form = RenewBookForm(data={'extend_days': timedelta(days=days)})
-            # use the `data` argument with key-value pair to input form fields
+            # use the `data` argument with key-value pair to input
+            # data into form fields
             self.assertTrue(form.is_valid())
 
     def test_invalid_extension_days(self):
         invalid_days = set(i for i in range(1, 16)) - set([3, 7, 14])
         for days in invalid_days:
             form = RenewBookForm(data={'extend_days': timedelta(days=days)})
+            # use the `data` argument with key-value pair to input
+            # data into form fields
             self.assertFalse(form.is_valid())
 
 
