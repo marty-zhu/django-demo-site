@@ -12,6 +12,7 @@ class TestRenewBookForm(TestCase):
         form = RenewBookForm()
         self.assertTrue(
             form.fields['extend_days'].label in ['extend_days', None]
+            # check field label in list because it could be None
         )
 
     def test_help_text(self):
@@ -24,6 +25,7 @@ class TestRenewBookForm(TestCase):
     def test_valid_extension_days(self):
         for days in (3, 7, 14):
             form = RenewBookForm(data={'extend_days': timedelta(days=days)})
+            # use the `data` argument with key-value pair to input form fields
             self.assertTrue(form.is_valid())
 
     def test_invalid_extension_days(self):
