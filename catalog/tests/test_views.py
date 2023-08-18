@@ -7,7 +7,13 @@ class TestAuthorListView(TestCase):
 
     @classmethod
     def setUpTestData(cls):
-        pass
+        num_authors = 13
+        
+        for author_id in range(num_authors):
+            Author.create(
+                first_name = 'Test',
+                last_name = f"Author{author_id}"
+            )
     
     def test_url_accessible_by_locator(self):
         pass
