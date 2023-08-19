@@ -29,7 +29,8 @@ class TestAuthorListView(TestCase):
         )
         
     def test_url_accessible_by_locator(self):
-        pass
+        resp = self.client.get('/catalog/authors/')
+        self.assertEqual(resp.status_code, 200)
 
     def test_url_accessible_by_name(self):
         pass
