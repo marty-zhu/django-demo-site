@@ -15,6 +15,12 @@ class TestAuthorListView(TestCase):
                 first_name = 'Test',
                 last_name = f"Author{author_id}"
             )
+
+        test_user = User.objects.create_user(
+            username = 'test_user',
+            password = 'fortesting'
+        )
+        test_user.save()
         
     def test_url_accessible_by_locator(self):
         pass
