@@ -21,6 +21,12 @@ class TestAuthorListView(TestCase):
             password = 'fortesting'
         )
         test_user.save()
+
+    def setUp(self):
+        self.client.login(
+            username = 'test_user',
+            password = 'fortesting',
+        )
         
     def test_url_accessible_by_locator(self):
         pass
