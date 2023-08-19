@@ -1,4 +1,5 @@
 from django.test import TestCase
+from django.urls import reverse
 
 from catalog.models import *
 
@@ -14,7 +15,7 @@ class TestAuthorListView(TestCase):
                 first_name = 'Test',
                 last_name = f"Author{author_id}"
             )
-    
+        
     def test_url_accessible_by_locator(self):
         pass
 
