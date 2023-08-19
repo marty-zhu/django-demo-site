@@ -33,7 +33,8 @@ class TestAuthorListView(TestCase):
         self.assertEqual(resp.status_code, 200)
 
     def test_url_accessible_by_name(self):
-        pass
+        resp = self.client.get(reverse('catalog:authors'))
+        self.assertEqual(resp.status_code, 200)
 
     def test_view_template_is_correct(self):
         pass
