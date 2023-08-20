@@ -28,6 +28,15 @@ class TestLoginRedirect(TestCase):
             resp, '/accounts/login/?next=/catalog/authors/'
             )
 
+    def test_login(self):
+        self.client.login(
+            username = 'test_user',
+            password = 'fortesting',
+        )
+        resp = self.client.get(reverse('catalog:authors'))
+        self.assertEqual(str(resp.context['user']), 'test_user')
+        self.assertEqual(resp.status_code, 200)
+
 
 class TestAuthorListView(TestCase):
 
