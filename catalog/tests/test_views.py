@@ -50,5 +50,11 @@ class TestAuthorListView(TestCase):
             len(resp.context['list_of_all_authors']), 10
             )
 
-    def test_view_list_all_authors(self):
-        pass
+    def test_view_lists_all_authors(self):
+        resp = self.client.get(reverse('catalog:authors') + '?page=2')
+        self.assertEqual(resp.status_code, 200)
+        self.assertTrue('is_paginated' in resp.context)
+        self.assertTrue(resp.context['is_paginated'])
+        self.assertEqual(
+            len(resp.context['list_of_all_authors']), 3
+        )
