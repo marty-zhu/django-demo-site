@@ -42,7 +42,13 @@ class TestAuthorListView(TestCase):
         self.assertTemplateUsed(resp, 'catalog/authors.html')
 
     def test_pagination_is_ten(self):
-        pass
+        resp = self.client.get('/catalog/authors/')
+        self.assertEqual(resp.status_code, 200)
+        self.assertTrue('is_paginated' in resp.context)
+        self.assertTrue(resp.context['is_paginated'])
+        self.assertEqual(
+            len(resp.context['list_of_all_authors']), 10
+            )
 
     def test_view_list_all_authors(self):
         pass
