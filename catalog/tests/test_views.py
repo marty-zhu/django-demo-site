@@ -42,6 +42,7 @@ class TestAuthorListView(TestCase):
 
     @classmethod
     def setUpTestData(cls):
+        """Set up test data for entire class. Runs once."""
         num_authors = 13
         
         for author_id in range(num_authors):
@@ -57,6 +58,9 @@ class TestAuthorListView(TestCase):
         test_user.save()
 
     def setUp(self):
+        """Set up test data for each test in the class.
+        Runs once for every test method in the class.
+        """
         self.client.login(
             username = 'test_user',
             password = 'fortesting',
