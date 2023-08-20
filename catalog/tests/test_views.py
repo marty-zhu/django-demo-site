@@ -4,6 +4,26 @@ from django.urls import reverse
 from catalog.models import *
 
 
+class TestLoginRedirect(TestCase):
+
+    @classmethod
+    def setUpTestData(cls) -> None:
+        num_authors = 3
+        for author_id in range(num_authors):
+            Author.objects.create(
+                first_name = 'Test',
+                last_name = f'Author{author_id}'
+            )
+        
+        test_user = User.objects.create_user(
+            username = 'test_user',
+            password = 'fortesting',
+        )
+        test_user.save()
+
+    
+
+
 class TestAuthorListView(TestCase):
 
     @classmethod
