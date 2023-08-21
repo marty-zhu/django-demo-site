@@ -43,6 +43,7 @@ class TestAuthorListView(TestCase):
     @classmethod
     def setUpTestData(cls):
         """Set up test data for entire class. Runs once.
+
         WARNING: Don't use this if one of the test methods will change
         the data.
         """
