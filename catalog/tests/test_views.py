@@ -45,7 +45,7 @@ class TestAuthorListView(TestCase):
         """Set up test data for entire class. Runs once.
 
         WARNING: Don't use this if one of the test methods will change
-        the data.
+        the data, use `setUp()` instead.
         """
         num_authors = 13
         
