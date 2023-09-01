@@ -155,4 +155,17 @@ class TestBookListView(TestCase):
             password='fortesting'
         )
 
-    
+    def test_page_accessible_by_locator(self):
+        self.fail('test not written yet per TDD')
+
+    def test_page_accessible_by_url(self):
+        self.fail('test not written yet per TDD')
+
+    def test_page_template_is_correct(self):
+        self.fail('test not written yet per TDD')
+
+    def test_pagination_is_ten(self):
+        self.fail('test not written yet per TDD')
+
+    def test_all_books_are_displayed(self):
+        self.fail('test not written yet per TDD')
