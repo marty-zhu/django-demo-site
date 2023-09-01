@@ -131,15 +131,18 @@ class TestBookView(TestCase):
         language = Language.objects.create(
             name='Test Language'
         )
-        book = Book.objects.create(
-            isbn=88888,
-            title='Test Title',
-            summary='This is a test book',
-        )
-        book.authors.add(author)
-        book.genre.add(genre)
-        book.language.set(language)
-        book.save()
+
+        num_books = 15
+        for num in range(num_books):
+            book = Book.objects.create(
+                isbn=num,
+                title=f'Test Title {num}',
+                summary=f'This is a test book for book {num}',
+            )
+            book.authors.add(author)
+            book.genre.add(genre)
+            book.language.set(language)
+            book.save()
         
         test_user = User.objects.create_user(
             username='test_user',
@@ -152,3 +155,4 @@ class TestBookView(TestCase):
             password='fortesting'
         )
 
+    
