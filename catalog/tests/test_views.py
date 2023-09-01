@@ -4,18 +4,20 @@ from django.urls import reverse
 from catalog.models import *
 
 
-def login_test_user(self):
-    self.username = 'test_user',
-    self.password = 'fortesting'
+def login_test_user(client=None):
+    username = 'test_user',
+    password = 'fortesting'
     test_user = User.objects.create(
-        username=self.username
+        username=username
     )
-    test_user.set_password(self.password)
+    test_user.set_password(password)
     test_user.save()
 
-    c = Client()
-    c.login(username=self.username, password=self.password)
-    return c, test_user
+    if client is None:
+        client = Client()
+
+    client.login(username=username, password=password)
+    return client, test_user
 
 class TestIndexView(TestCase):
     
@@ -42,12 +44,6 @@ class TestLoginRedirect(TestCase):
                 last_name = f'Author{author_id}'
             )
         
-        test_user = User.objects.create_user(
-            username = 'test_user',
-            password = 'fortesting',
-        )
-        test_user.save()
-
     def test_correct_not_logged_in_redirect(self):
         resp = self.client.get(reverse('catalog:authors'))
         self.assertEqual(resp.status_code, 302)
@@ -56,10 +52,7 @@ class TestLoginRedirect(TestCase):
             )
 
     def test_login(self):
-        self.client.login(
-            username = 'test_user',
-            password = 'fortesting',
-        )
+        login_test_user()
         resp = self.client.get(reverse('catalog:authors'))
         self.assertEqual(str(resp.context['user']), 'test_user')
         self.assertEqual(resp.status_code, 200)
