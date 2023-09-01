@@ -4,6 +4,17 @@ from django.urls import reverse
 from catalog.models import *
 
 
+class TestIndexView(TestCase):
+    
+    def test_empty_library(self):
+        resp = self.client.get(reverse('catalog:index'))
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(resp.context['num_visits'], 0)
+        self.assertEqual(resp.context['num_books'], 0)
+        self.assertEqual(resp.context['num_authors'], 0)
+        self.assertEqual(resp.context['num_genres'], 0)
+        self.assertEqual(resp.context['num_language'], 0)
+
 class TestLoginRedirect(TestCase):
 
     @classmethod
