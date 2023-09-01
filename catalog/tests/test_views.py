@@ -1,4 +1,4 @@
-from django.test import TestCase
+from django.test import TestCase, Client
 from django.urls import reverse
 
 from catalog.models import *
@@ -69,6 +69,9 @@ class TestAuthorListView(TestCase):
                 last_name = f"Author{author_id}"
             )
 
+    @classmethod
+    def setUpClass(cls):
+        # TODO: refactor user login to separate function
         test_user = User.objects.create_user(
             username = 'test_user',
             password = 'fortesting'
@@ -141,7 +144,7 @@ class TestBookListView(TestCase):
             )
             book.authors.add(author)
             book.genre.add(genre)
-            book.language.set(language)
+            book.language = language
             book.save()
         
         test_user = User.objects.create_user(
