@@ -114,3 +114,41 @@ class TestAuthorListView(TestCase):
         self.assertEqual(
             len(resp.context['list_of_all_authors']), 3
         )
+
+
+class TestBookView(TestCase):
+
+    @classmethod
+    def setUpTestData(cls):
+        author = Author.objects.create(
+            first_name='John',
+            last_name='Doe',
+        )
+        author.save()
+        genre = Genre.objects.create(
+            name='Test Genre',
+        )
+        language = Language.objects.create(
+            name='Test Language'
+        )
+        book = Book.objects.create(
+            isbn=88888,
+            title='Test Title',
+            summary='This is a test book',
+        )
+        book.authors.add(author)
+        book.genre.add(genre)
+        book.language.set(language)
+        book.save()
+        
+        test_user = User.objects.create_user(
+            username='test_user',
+            password='fortesting'
+        )
+        test_user.save()
+
+        cls.client.login(
+            username='test_user',
+            password='fortesting'
+        )
+
