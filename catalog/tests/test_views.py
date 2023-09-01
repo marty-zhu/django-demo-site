@@ -15,6 +15,9 @@ class TestIndexView(TestCase):
         self.assertEqual(resp.context['num_genres'], 0)
         self.assertEqual(resp.context['num_language'], 0)
 
+    #TODO: add populated library test
+
+
 class TestLoginRedirect(TestCase):
 
     @classmethod
