@@ -116,7 +116,7 @@ class TestAuthorListView(TestCase):
         )
 
 
-class TestBookView(TestCase):
+class TestBookListView(TestCase):
 
     @classmethod
     def setUpTestData(cls):
