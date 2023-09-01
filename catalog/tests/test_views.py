@@ -4,6 +4,19 @@ from django.urls import reverse
 from catalog.models import *
 
 
+def login_test_user(self):
+    self.username = 'test_user',
+    self.password = 'fortesting'
+    test_user = User.objects.create(
+        username=self.username
+    )
+    test_user.set_password(self.password)
+    test_user.save()
+
+    c = Client()
+    c.login(username=self.username, password=self.password)
+    return c, test_user
+
 class TestIndexView(TestCase):
     
     def test_empty_library(self):
