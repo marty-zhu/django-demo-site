@@ -4,14 +4,6 @@ from django.urls import reverse
 from catalog.models import *
 
 
-def create_test_user():
-    test_user = User.objects.create_user(
-        username='test_user',
-        password='fortesting',
-    )
-    test_user.save()
-    return test_user
-
 class TestIndexView(TestCase):
     
     def test_empty_library(self):
@@ -36,6 +28,12 @@ class TestLoginRedirect(TestCase):
                 first_name = 'Test',
                 last_name = f'Author{author_id}'
             )
+
+        test_user = User.objects.create_user(
+            username='test_user',
+            password='fortesting',
+        )
+        test_user.save()
         
     def test_correct_not_logged_in_redirect(self):
         resp = self.client.get(reverse('catalog:authors'))
@@ -45,9 +43,12 @@ class TestLoginRedirect(TestCase):
             )
 
     def test_login(self):
-        self.client, test_user = login_test_user(self.client)
+        self.client.login(
+            username='test_user',
+            password='fortesting',
+        )
         resp = self.client.get(reverse('catalog:authors'))
-        self.assertEqual(str(resp.context['user'][0]), test_user.username)
+        self.assertEqual(str(resp.context['user']), 'test_user')
         self.assertEqual(resp.status_code, 200)
 
 
@@ -68,9 +69,6 @@ class TestAuthorListView(TestCase):
                 last_name = f"Author{author_id}"
             )
 
-    @classmethod
-    def setUpClass(cls):
-        # TODO: refactor user login to separate function
         test_user = User.objects.create_user(
             username = 'test_user',
             password = 'fortesting'
@@ -152,7 +150,8 @@ class TestBookListView(TestCase):
         )
         test_user.save()
 
-        cls.client.login(
+    def setUp(self):
+        self.client.login(
             username='test_user',
             password='fortesting'
         )
