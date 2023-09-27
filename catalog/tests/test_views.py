@@ -157,10 +157,12 @@ class TestBookListView(TestCase):
         )
 
     def test_page_accessible_by_locator(self):
-        self.fail('test not written yet per TDD')
+        resp = self.client.get('/catalog/books/')
+        self.assertEqual(resp.status_code, 200)
 
-    def test_page_accessible_by_url(self):
-        self.fail('test not written yet per TDD')
+    def test_page_accessible_by_name(self):
+        resp = self.client.get(reverse('catalog:books'))
+        self.assertEqual(resp.status_code, 200)
 
     def test_page_template_is_correct(self):
         self.fail('test not written yet per TDD')
