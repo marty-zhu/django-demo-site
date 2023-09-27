@@ -188,3 +188,25 @@ class TestBookListView(TestCase):
             len(resp.context['list_of_all_books']),
             5
         )
+
+class TestBookDetailView(TestCase):
+
+    @classmethod
+    def setUpTestData(cls):
+        pass
+
+    def setUp(self):
+        pass
+
+    def test_page_accessible_by_locator(self):
+        self.fail('Test note yet written.')
+
+    def test_page_accessible_by_name(self):
+        self.fail('Test note yet written.')
+
+    def test_page_template_is_correct(self):
+        self.fail('Test note yet written.')
+
+    def test_page_display_correct_content(self):
+        self.fail('Test note yet written.')
+
