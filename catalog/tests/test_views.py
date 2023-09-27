@@ -35,7 +35,7 @@ class TestLoginRedirect(TestCase):
         )
         test_user.save()
         
-    def test_correct_not_logged_in_redirect(self):
+    def test_page_redirects_when_not_logged_in(self):
         resp = self.client.get(reverse('catalog:authors'))
         self.assertEqual(resp.status_code, 302)
         self.assertRedirects(
