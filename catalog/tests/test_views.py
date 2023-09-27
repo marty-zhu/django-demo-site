@@ -210,3 +210,24 @@ class TestBookDetailView(TestCase):
     def test_page_display_correct_content(self):
         self.fail('Test note yet written.')
 
+
+class TestLoanedBooksByUserListView(TestCase):
+
+    @classmethod
+    def setUpTestData(cls):
+        pass
+
+    def setUp(self):
+        pass
+
+    def test_page_accessible_by_locator(self):
+        self.fail('Test not yet written')
+
+    def test_page_accessible_by_name(self):
+        self.fail('Test not yet written')
+
+    def test_only_books_by_user_is_displayed(self):
+        self.fail('Test not yet written')
+
+    def test_books_not_by_user_is_not_displayed(self):
+        self.fail('Test not yet written')
