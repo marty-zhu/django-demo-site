@@ -165,10 +165,26 @@ class TestBookListView(TestCase):
         self.assertEqual(resp.status_code, 200)
 
     def test_page_template_is_correct(self):
-        self.fail('test not written yet per TDD')
+        resp = self.client.get('/catalog/books/')
+        self.assertEqual(resp.status_code, 200)
+        self.assertTemplateUsed('catalog/books.html')
 
     def test_pagination_is_ten(self):
-        self.fail('test not written yet per TDD')
+        resp = self.client.get(reverse('catalog:books'))
+        self.assertEqual(resp.status_code, 200)
+        self.assertTrue('is_paginated' in resp.context)
+        self.assertTrue(resp.context['is_paginated'])
+        self.assertEqual(
+            len(resp.context['list_of_all_books']),
+            10
+        )
 
     def test_all_books_are_displayed(self):
-        self.fail('test not written yet per TDD')
+        resp = self.client.get(reverse('catalog:books') + '?page=2')
+        self.assertEqual(resp.status_code, 200)
+        self.assertTrue('is_paginated' in resp.context)
+        self.assertTrue(resp.context['is_paginated'])
+        self.assertEqual(
+            len(resp.context['list_of_all_books']),
+            5
+        )
