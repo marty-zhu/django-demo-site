@@ -378,13 +378,20 @@ class TestAllLoandedBooksLibrarianListView(TestCase):
         librarian.save()
 
     def setUp(self):
-        pass
+        self.client.login(
+            username='test_librarian',
+            password='fortesting',
+        )
 
     def test_page_accessible_by_locator(self):
-        self.fail('Test note yet written.')
+        resp = self.client.get('/catalog/librarian/booksloaned/')
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(str(resp.context['user']), 'test_librarian')
 
     def test_page_accessible_by_name(self):
-        self.fail('Test note yet written.')
+        resp = self.client.get(reverse('catalog:books-on-loan'))
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(str(resp.context['user']), 'test_librarian')
 
     def test_page_template_is_correct(self):
         self.fail('Test note yet written.')
