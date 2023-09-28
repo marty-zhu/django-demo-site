@@ -242,6 +242,7 @@ class TestLoanedBooksByUserListView(TestCase):
                     book=book,
                 )
                 book_copies.append(book_copy)
+
         book1 = book_copies[0]
         book1.borrower = test_user1
         book1.save()
@@ -253,10 +254,20 @@ class TestLoanedBooksByUserListView(TestCase):
         book3.save()
 
     def test_page_accessible_by_locator(self):
-        self.fail('Test not yet written')
+        self.client.login(
+            username='test_user1',
+            password='fortesting',
+        )
+        resp = self.client.get('/catalog/mybooks/')
+        self.assertEqual(resp.status_code, 200)
 
     def test_page_accessible_by_name(self):
-        self.fail('Test not yet written')
+        self.client.login(
+            username='test_user2',
+            password='fortesting',
+        )
+        resp = self.client.get(reverse('catalog:my-borrowed'))
+        self.assertEqual(resp.status_code, 200)
 
     def test_only_books_by_user_is_displayed(self):
         self.fail('Test not yet written')
