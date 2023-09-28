@@ -243,14 +243,22 @@ class TestLoanedBooksByUserListView(TestCase):
                 )
                 book_copies.append(book_copy)
 
+        return_date = timezone.localtime() + timedelta(days=1)
+        status = 'o'
         book1 = book_copies[0]
         book1.borrower = test_user1
+        book1.due_back = return_date
+        book1.status = status
         book1.save()
         book2 = book_copies[1]
         book2.borrower = test_user2
+        book2.due_back = return_date
+        book2.status = status
         book2.save()
         book3 = book_copies[2]
         book3.borrower = test_user2
+        book3.due_back = return_date
+        book3.status = status
         book3.save()
 
     def test_page_accessible_by_locator(self):
@@ -270,7 +278,16 @@ class TestLoanedBooksByUserListView(TestCase):
         self.assertEqual(resp.status_code, 200)
 
     def test_only_books_by_user_is_displayed(self):
-        self.fail('Test not yet written')
+        self.client.login(
+            username='test_user1',
+            password='fortesting',
+        )
+        resp = self.client.get('/catalog/mybooks/')
+        self.assertTrue('bookinstance_list' in resp.context)
+        self.assertEqual(
+            len(resp.context['bookinstance_list']),
+            1
+        )
 
     def test_books_not_by_user_is_not_displayed(self):
         self.fail('Test not yet written')
