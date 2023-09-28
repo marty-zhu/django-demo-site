@@ -302,4 +302,27 @@ class TestLoanedBooksByUserListView(TestCase):
         )
 
     def test_books_not_by_user_is_not_displayed(self):
-        self.fail('Test not yet written')
+        self.client.login(
+            username='test_user2',
+            password='fortesting',
+        )
+        resp = self.client.get('/catalog/mybooks/')
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(
+            len(resp.context['bookinstance_list']),
+            1
+        )
+        user_2_book = resp.context['bookinstance_list'][0]
+
+        self.client.login(
+            username='test_user1',
+            password='fortesting',
+        )
+        resp = self.client.get('/catalog/mybooks/')
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(
+            len(resp.context['bookinstance_list']),
+            2
+        )
+        user_1_books = resp.context['bookinstance_list']
+        self.assertTrue(user_2_book not in user_1_books)  
