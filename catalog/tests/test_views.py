@@ -215,10 +215,42 @@ class TestLoanedBooksByUserListView(TestCase):
 
     @classmethod
     def setUpTestData(cls):
-        pass
+        test_user1 = User.objects.create_user(
+            username='test_user1',
+            password='fortesting',
+        )
+        test_user1.save()
+        test_user2 = User.objects.create_user(
+            username='test_user2',
+            password='fortesting',
+        )
+        test_user2.save()
 
-    def setUp(self):
-        pass
+        books = []
+        for num in range(1, 4):
+            book = Book.objects.create(
+                title=f'TestBook{num}',
+                isbn=num,
+            )
+            books.append(book)
+        
+        book_copies = []
+        books_in_lib = dict(zip(books, [1,2,1]))
+        for book, count in books_in_lib.items():
+            for num in range(count):
+                book_copy = BookInstance.objects.create(
+                    book=book,
+                )
+                book_copies.append(book_copy)
+        book1 = book_copies[0]
+        book1.borrower = test_user1
+        book1.save()
+        book2 = book_copies[1]
+        book2.borrower = test_user2
+        book2.save()
+        book3 = book_copies[2]
+        book3.borrower = test_user2
+        book3.save()
 
     def test_page_accessible_by_locator(self):
         self.fail('Test not yet written')
