@@ -326,3 +326,28 @@ class TestLoanedBooksByUserListView(TestCase):
         )
         user_1_books = resp.context['bookinstance_list']
         self.assertTrue(user_2_book not in user_1_books)  
+
+
+class TestAllLoandedBooksLibrarianListView(TestCase):
+
+    @classmethod
+    def setUpTestData(cls):
+        pass
+
+    def setUp(self):
+        pass
+
+    def test_page_accessible_by_locator(self):
+        self.fail('Test note yet written.')
+
+    def test_page_accessible_by_name(self):
+        self.fail('Test note yet written.')
+
+    def test_page_template_is_correct(self):
+        self.fail('Test note yet written.')
+
+    def test_all_books_on_loan_is_listed(self):
+        self.fail('Test note yet written.')
+
+    def test_books_not_on_loan_is_not_displayed(self):
+        self.fail('Test note yet written.')
