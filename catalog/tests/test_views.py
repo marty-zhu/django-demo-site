@@ -251,7 +251,7 @@ class TestLoanedBooksByUserListView(TestCase):
         book1.status = status
         book1.save()
         book2 = book_copies[1]
-        book2.borrower = test_user2
+        book2.borrower = test_user1
         book2.due_back = return_date
         book2.status = status
         book2.save()
@@ -277,9 +277,21 @@ class TestLoanedBooksByUserListView(TestCase):
         resp = self.client.get(reverse('catalog:my-borrowed'))
         self.assertEqual(resp.status_code, 200)
 
-    def test_only_books_by_user_is_displayed(self):
+    def test_only_books_by_user1_is_displayed(self):
         self.client.login(
             username='test_user1',
+            password='fortesting',
+        )
+        resp = self.client.get('/catalog/mybooks/')
+        self.assertTrue('bookinstance_list' in resp.context)
+        self.assertEqual(
+            len(resp.context['bookinstance_list']),
+            2
+        )
+
+    def test_only_books_by_user2_is_displayed(self):
+        self.client.login(
+            username='test_user2',
             password='fortesting',
         )
         resp = self.client.get('/catalog/mybooks/')
