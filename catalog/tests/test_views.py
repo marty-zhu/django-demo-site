@@ -267,6 +267,7 @@ class TestLoanedBooksByUserListView(TestCase):
             password='fortesting',
         )
         resp = self.client.get('/catalog/mybooks/')
+        self.assertEqual(str(resp.context['user']), 'test_user1')
         self.assertEqual(resp.status_code, 200)
 
     def test_page_accessible_by_name(self):
@@ -275,6 +276,7 @@ class TestLoanedBooksByUserListView(TestCase):
             password='fortesting',
         )
         resp = self.client.get(reverse('catalog:my-borrowed'))
+        self.assertEqual(str(resp.context['user']), 'test_user2')
         self.assertEqual(resp.status_code, 200)
 
     def test_only_books_by_user1_is_displayed(self):
@@ -283,6 +285,7 @@ class TestLoanedBooksByUserListView(TestCase):
             password='fortesting',
         )
         resp = self.client.get('/catalog/mybooks/')
+        self.assertEqual(str(resp.context['user']), 'test_user1')
         self.assertTrue('bookinstance_list' in resp.context)
         self.assertEqual(
             len(resp.context['bookinstance_list']),
@@ -295,6 +298,7 @@ class TestLoanedBooksByUserListView(TestCase):
             password='fortesting',
         )
         resp = self.client.get('/catalog/mybooks/')
+        self.assertEqual(str(resp.context['user']), 'test_user2')
         self.assertTrue('bookinstance_list' in resp.context)
         self.assertEqual(
             len(resp.context['bookinstance_list']),
@@ -307,6 +311,7 @@ class TestLoanedBooksByUserListView(TestCase):
             password='fortesting',
         )
         resp = self.client.get('/catalog/mybooks/')
+        self.assertEqual(str(resp.context['user']), 'test_user2')
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(
             len(resp.context['bookinstance_list']),
@@ -319,6 +324,7 @@ class TestLoanedBooksByUserListView(TestCase):
             password='fortesting',
         )
         resp = self.client.get('/catalog/mybooks/')
+        self.assertEqual(str(resp.context['user']), 'test_user1')
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(
             len(resp.context['bookinstance_list']),
