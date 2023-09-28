@@ -2,7 +2,7 @@ from django.test import TestCase, Client
 from django.urls import reverse
 
 from catalog.models import *
-
+from django.contrib.auth.models import Permission
 
 class TestIndexView(TestCase):
     
@@ -338,7 +338,44 @@ class TestAllLoandedBooksLibrarianListView(TestCase):
 
     @classmethod
     def setUpTestData(cls):
-        pass
+        test_user1 = User.objects.create_user(
+            username='test_user1',
+            password='fortesting',
+        )
+        test_user2 = User.objects.create_user(
+            username='test_user2',
+            password='fortesting',
+        )
+        test_user3 = User.objects.create_user(
+            username='test_user3',
+            password='fortesting',
+        )
+        test_user1.save()
+        test_user2.save()
+        test_user3.save()
+        users = [test_user1, test_user2, test_user3]
+
+        book_copies = []
+        for num in range(1,13):
+            book = Book.objects.create(
+                title=f"Test Book {num}",
+                isbn=num,
+            )
+            copy = BookInstance.objects.create(
+                book=book,
+                status='o',
+                due_back=timezone.localtime() + timedelta(days=num),
+                borrower=users[num%3]
+            )
+            book_copies.append(copy)
+        
+        librarian = User.objects.create_user(
+            username='test_librarian',
+            password='fortesting',
+        )
+        permission = Permission.objects.get(name='Set book as returned')
+        librarian.user_permissions.add(permission)
+        librarian.save()
 
     def setUp(self):
         pass
