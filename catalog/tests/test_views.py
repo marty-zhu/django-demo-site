@@ -356,7 +356,7 @@ class TestAllLoandedBooksLibrarianListView(TestCase):
         users = [test_user1, test_user2, test_user3]
 
         book_copies = []
-        for num in range(1,13):
+        for num in range(1,22):
             book = Book.objects.create(
                 title=f"Test Book {num}",
                 isbn=num,
@@ -394,13 +394,53 @@ class TestAllLoandedBooksLibrarianListView(TestCase):
         self.assertEqual(str(resp.context['user']), 'test_librarian')
 
     def test_page_template_is_correct(self):
-        self.fail('Test note yet written.')
+        resp = self.client.get(reverse('catalog:books-on-loan'))
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(str(resp.context['user']), 'test_librarian')
+        self.assertTemplateUsed('catalog/bookinstance_on_loan_list.html')
+
+    def test_page_is_paginated(self):
+        resp = self.client.get('/catalog/librarian/booksloaned/')
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(str(resp.context['user']), 'test_librarian')
+        self.assertTrue('is_paginated' in resp.context)
+        self.assertTrue(resp.context['is_paginated'])
 
     def test_all_books_on_loan_is_listed(self):
-        self.fail('Test note yet written.')
+        resp = self.client.get('/catalog/librarian/booksloaned/')
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(str(resp.context['user']), 'test_librarian')
+        self.assertTrue('is_paginated' in resp.context)
+        self.assertTrue(resp.context['is_paginated'])
+        self.assertEqual(
+            len(resp.context['bookinstance_list']),
+            20
+        )
+        resp = self.client.get('/catalog/librarian/booksloaned/' \
+                               + '?page=2')
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(
+            len(resp.context['bookinstance_list']),
+            1
+        )
 
     def test_books_not_on_loan_is_not_displayed(self):
-        self.fail('Test note yet written.')
+        book = Book.objects.create(
+            title='Book not on loan',
+            isbn=999,
+        )
+        book_copy = BookInstance.objects.create(
+            book=book,
+            status='a',
+        )
+        resp = self.client.get('/catalog/librarian/booksloaned/')
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(str(resp.context['user']), 'test_librarian')
+        self.assertTrue(book_copy not in resp.context['bookinstance_list'])
+        resp = self.client.get('/catalog/librarian/booksloaned/' \
+                               + '?page=2')
+        self.assertEqual(resp.status_code, 200)
+        self.assertTrue(book_copy not in resp.context['bookinstance_list'])
 
     def test_books_ordered_by_due_date(self):
         self.fail('Test note yet written.')
