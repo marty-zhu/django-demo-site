@@ -351,3 +351,6 @@ class TestAllLoandedBooksLibrarianListView(TestCase):
 
     def test_books_not_on_loan_is_not_displayed(self):
         self.fail('Test note yet written.')
+
+    def test_books_ordered_by_due_date(self):
+        self.fail('Test note yet written.')
