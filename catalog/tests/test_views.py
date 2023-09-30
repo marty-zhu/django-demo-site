@@ -433,6 +433,7 @@ class TestAllLoandedBooksLibrarianListView(TestCase):
             book=book,
             status='a',
         )
+        book_copy.save()
         resp = self.client.get('/catalog/librarian/booksloaned/')
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(str(resp.context['user']), 'test_librarian')
@@ -443,4 +444,19 @@ class TestAllLoandedBooksLibrarianListView(TestCase):
         self.assertTrue(book_copy not in resp.context['bookinstance_list'])
 
     def test_books_ordered_by_due_date(self):
-        self.fail('Test note yet written.')
+        resp = self.client.get('/catalog/librarian/booksloaned/')
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(str(resp.context['user']), 'test_librarian')
+        bookinstance_list = resp.context['bookinstance_list']
+        resp = self.client.get('/catalog/librarian/booksloaned/' \
+                               + '?page=2')
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(str(resp.context['user']), 'test_librarian')
+        bookinstance_list = bookinstance_list | resp.context['bookinstance_list']
+        last_date = 0
+        for bookinstance in bookinstance_list:
+            if last_date == 0:
+                last_date = bookinstance.due_back
+            else:
+                self.assertTrue(last_date <= bookinstance.due_back)
+                last_date = bookinstance.due_back
