@@ -460,3 +460,34 @@ class TestAllLoandedBooksLibrarianListView(TestCase):
             else:
                 self.assertTrue(last_date <= bookinstance.due_back)
                 last_date = bookinstance.due_back
+
+
+class TestLibrarianManageUserView(TestCase):
+
+    @classmethod
+    def setUpTestData(cls):
+        pass
+
+    def setUp(self):
+        pass
+
+    def test_page_accessible_by_locator(self):
+        self.fail('Test not yet written.')
+
+    def test_page_accessible_by_name(self):
+        self.fail('Test not yet written.')
+
+    def test_page_not_accessible_by_regular_members(self):
+        self.fail('Test not yet written.')
+
+    def test_page_uses_correct_template(self):
+        self.fail('Test not yet written.')
+
+    def test_404_if_no_user_exist(self):
+        self.fail('Test not yet written.')
+
+    def test_page_lists_all_user_books(self):
+        self.fail('Test not yet written.')
+
+    def test_page_does_not_list_books_not_by_user(self):
+        self.fail('Test not yet written.')
