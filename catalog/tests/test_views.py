@@ -466,15 +466,43 @@ class TestLibrarianManageUserView(TestCase):
 
     @classmethod
     def setUpTestData(cls):
-        # TODO create regular member
-        # TODO create librarian
-        # TODO create 3 books with one instance each assign to member
-        # TODO create 1 book with one instance, don't assign
-        # TODO make sure to save all objects
-        pass
+        regular_user = User.objects.create_user(
+            username='regular_user',
+            password='fortesting',
+        )
+        regular_user.save()
+
+        librarian = User.objects.create_user(
+            username='test_librarian',
+            password='fortesting',
+        )
+        permission = Permission.objects.get(
+            codename='can_mark_returned'
+        )
+        librarian.user_permissions.add(permission)
+        librarian.save()
+
+        books_on_loan = []
+        for num in range(1, 4):
+            book = Book.objects.create(
+                title=f"Test Book {num}",
+                isbn=num,
+            )
+            book.save()
+            copy = BookInstance.objects.create(
+                book=book,
+                status='o',
+                due_back=timezone.localtime() + timedelta(days=num),
+                borrower=regular_user,
+            )
+            copy.save()
+            books_on_loan.append(copy)
 
     def setUp(self):
-        pass
+        self.client.login(
+            username='test_librarian',
+            password='fortesting',
+        )
 
     def test_page_accessible_by_locator(self):
         self.fail('Test not yet written.')
