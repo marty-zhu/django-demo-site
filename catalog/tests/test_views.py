@@ -466,6 +466,11 @@ class TestLibrarianManageUserView(TestCase):
 
     @classmethod
     def setUpTestData(cls):
+        # TODO create regular member
+        # TODO create librarian
+        # TODO create 3 books with one instance each assign to member
+        # TODO create 1 book with one instance, don't assign
+        # TODO make sure to save all objects
         pass
 
     def setUp(self):
