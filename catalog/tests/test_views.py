@@ -505,13 +505,24 @@ class TestLibrarianManageUserView(TestCase):
         )
 
     def test_page_accessible_by_locator(self):
-        self.fail('Test not yet written.')
+        resp = self.client.get('/catalog/librarian/user/regular_user')
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(str(resp.context['user']), 'test_librarian')
 
     def test_page_accessible_by_name(self):
-        self.fail('Test not yet written.')
+        resp = self.client.get(reverse('catalog:librarian-manage-member',
+                args=['regular_user']))
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(str(resp.context['user']), 'test_librarian')
 
-    def test_page_not_accessible_by_regular_members(self):
-        self.fail('Test not yet written.')
+    def test_page_forbidden_to_regular_members(self):
+        self.client.login(
+            username='regular_user',
+            password='fortesting',
+        )
+        resp = self.client.get(reverse('catalog:librarian-manage-member',
+                args=['test_librarian']))
+        self.assertEqual(resp.status_code, 403)
 
     def test_page_uses_correct_template(self):
         self.fail('Test not yet written.')
